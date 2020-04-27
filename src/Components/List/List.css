@@ -34,3 +34,7 @@
 		margin-top: 25px;
 	}
 }
+
+.status-hidden{
+	visibility: hidden;
+}

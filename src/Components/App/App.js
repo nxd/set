@@ -257,6 +257,7 @@ class App extends React.Component {
           </div>
           <div className='right-panel'> 
             <List
+              gameStatus = {this.state.gameStatus}
               nSets={this.state.nSets}
               foundSets={this.state.foundSets} 
             />

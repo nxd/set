@@ -5,6 +5,14 @@ import './List.css'
 
 class List extends React.Component {
 
+	isPregame() {
+		// this method returns an additional classname
+		// to hide the SETs found text if in pregame state
+		if(this.props.gameStatus.pregame){
+			return 'status-hidden';
+		}
+	}
+
 	renderFoundSets() {
 		let foundSets = this.props.foundSets;
 		var rowsFound = [];
@@ -47,7 +55,7 @@ class List extends React.Component {
 	render(){
 		return (
 			<div className='setList'>
-				<h3 className='found-status'>{this.props.foundSets.length} of {this.props.nSets} SETs found</h3>
+				<h3 className={`found-status ${this.isPregame()}`}>{this.props.foundSets.length} of {this.props.nSets} SETs found</h3>
 
 				{this.renderFoundSets()}
 				{this.renderRemainingSets()}
