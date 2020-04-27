@@ -1,0 +1,24 @@
+svg {
+	/*height: 70%;*/
+	margin: 14px 2px;
+	display: inline;
+	width: 28%;
+}
+
+.red{
+  /*filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(0deg) brightness(118%) contrast(119%);*/
+  fill: rgb(221, 78, 74);
+}
+
+.green{
+  /*filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);*/
+  fill: rgb(80, 176, 99);
+}
+
+
+.blue{
+  /*filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(200deg) brightness(118%) contrast(119%);*/
+  fill: rgb(69, 48, 141);
+}
+
+

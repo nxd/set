@@ -1,0 +1,32 @@
+.messageBar {
+	/*border: 1px solid purple;*/
+	background-color: #EEE;
+	display: flex;
+	justify-content: center;
+}
+
+.messageBar h3 {	
+	border-radius: 3px;
+	margin: 1px;
+	width: 92%;
+}
+
+h3.success-msg {
+	background-color: rgba(80, 176, 99, 0.4)
+}
+
+h3.complete-msg {
+	background-color: rgba(69, 48, 141, 0.4)
+}
+
+h3.failure-msg {
+	background-color: rgba(221, 78, 74, 0.4)
+}
+
+h3.duplicate-msg {
+	background-color: rgba(90, 90, 90, 0.4)
+}
+
+h3.empty-msg {
+	visibility: hidden;
+}

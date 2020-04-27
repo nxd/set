@@ -1,0 +1,47 @@
+#root{
+	display: flex;
+	justify-content: center;
+}
+
+.App {
+	margin-top: 20px;
+	text-align: center;
+	width:80%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	max-width: 1000px;
+	min-width: 480px;
+	background-color: #EEE;
+}
+
+.cards-container {
+  display: flex;
+}
+
+.left-panel {
+	flex:5;
+}
+
+.right-panel {
+	flex:2;
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (max-width: 880px) {
+	.cards-container {
+		flex-direction: column;
+	}
+
+	.right-panel {
+		flex:1;
+	}
+
+ 	.left-panel {
+		flex:1;
+	}	
+}
+
+
+

@@ -1,0 +1,23 @@
+.foundCard {
+	border: .8px solid #555;
+	height: 3.4rem;
+	width: 25%;
+	border-radius: 10px;
+	display: inline-flex;
+	justify-content: center;
+	background-color: #FFF;
+	padding: 0px 1px;
+	margin: 3px;
+}
+
+.foundCard svg{
+	margin:0px 1px;
+	width: 28%;
+}
+
+.empty{
+	background-color: #ccc;
+	border: none;
+	opacity: 75%;
+}
+

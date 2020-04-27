@@ -1,0 +1,36 @@
+
+
+.foundSet {
+}
+
+
+.remainingSet {
+}
+
+.setList{
+	justify-content: flex-start;
+}
+
+.setList h3 {
+	width: 100%;
+}
+
+.found-status{
+	margin-bottom: 8px;
+}
+
+@media screen and (max-width: 880px) {
+	.setList{
+		display: flex;
+		flex-wrap: wrap;
+		/*justify-content: space-around;*/
+	}
+
+	.card-set{
+		width: 50%;
+	}
+
+	.found-status{
+		margin-top: 25px;
+	}
+}

@@ -1,0 +1,49 @@
+.card {
+	border: 1.4px solid #444;
+	width: 28%;
+	margin: 2%;
+	cursor: pointer;
+	border-radius: 10px;
+	display: inline-flex;
+	justify-content: center;
+	background-color: #FFF;
+}
+
+
+
+.active {
+	background-color: #c1e1ec;
+}
+
+.active:hover {
+	background-color: #add8e6;
+}
+
+.inactive {
+	background-color: #fff;
+}
+
+.inactive:hover, .success:hover , .fail:hover  {
+	background-color: #eee;
+}
+
+.success{
+	background-color: #fff;
+	box-shadow: 3px 3px 5px hsla(120,100%,19.6%, 20%), 
+	-3px -3px 5px hsla(120,100%,19.6%, 20%), 
+	3px -3px 5px hsla(120,100%,19.6%, 20%), 
+	-3px 3px 5px hsla(120,100%,19.6%, 20%);
+}
+
+.fail{
+	background-color: #fff;
+	box-shadow: 3px 3px 5px hsla(0,100%,35%, 20%), 
+	-3px -3px 5px hsla(0,100%,35%, 20%), 
+	3px -3px 5px hsla(0,100%,35%, 20%), 
+	-3px 3px 5px hsla(0,100%,35%, 20%);
+}
+
+.paused svg {
+	visibility: hidden;
+}
+
