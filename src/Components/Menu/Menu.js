@@ -24,12 +24,14 @@ class Menu extends React.Component {
 		//set static button icon locations
 		var newGameButtonSrc = process.env.PUBLIC_URL + 'icons/icon_refresh.png';
 		var shuffleButtonSrc = process.env.PUBLIC_URL + 'icons/icon_shuffle.png';
+		var helpButtonSrc = process.env.PUBLIC_URL + 'icons/icon_help.png';
 		var solveButtonSrc = process.env.PUBLIC_URL + 'icons/icon_solve.png';
 		var menuButtonSrc = process.env.PUBLIC_URL + 'icons/icon_menu.png';
 		var pauseButtonSrc;
 		var pauseButtonVis;
 		var newButtonVis;
 		var shuffleButtonVis;
+		var helpButtonVis;
 		var solveButtonVis;
 
 		//determine button status and icons for pregame
@@ -84,11 +86,17 @@ class Menu extends React.Component {
 					<h1 id='timerDisplay'>00:00</h1>
 				</div>
 				<div className={'submenu-group dropdown'}>
+					
 					<div className={`menu-button ${solveButtonVis}`}
 						id='solveButton'
 						onClick={this.props.newGame}
 					>
 						<img src={solveButtonSrc}/>
+					</div>
+					<div className={`menu-button ${helpButtonVis}`}
+						id='helpButton'
+					>
+						<img src={helpButtonSrc}/>
 					</div>
 					<div id='settingsButton' className='menu-button'>
 						<img src={menuButtonSrc}/>

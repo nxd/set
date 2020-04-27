@@ -17,7 +17,7 @@
 	border-radius: 4px;
 	display: inline-block;
 	margin: 6px 10px;
-	height: 3em;
+	/*height: 3em;*/
 }
 
 .menu-button:hover {
@@ -30,7 +30,7 @@
 }
 
 .menu-button img {
-	height: 2.5em;
+	height: 2em;
 	margin: 4px;
 }
 
