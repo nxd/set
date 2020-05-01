@@ -18,7 +18,7 @@ class List extends React.Component {
 		var rowsFound = [];
 
 		for (var j = 0; j < foundSets.length; j++){
-			let foundSet = foundSets[j]
+			let foundSet = foundSets[j].sort(function(a, b){return a-b});
 
 			let renderedSet = foundSet.map(cardNum => {
 				return <FoundCard value={cardNum}/>
