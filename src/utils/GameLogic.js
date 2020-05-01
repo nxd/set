@@ -121,6 +121,7 @@ const GameLogic = {
 
 
 	findSets(cardList) {
+		// function to find all SETs from a list of card numbers
 		var setsFound = [];
 	    for(var c1=0; c1<cardList.length; c1++){
 
@@ -152,8 +153,7 @@ const GameLogic = {
 	    }
 
 	    console.log(setsFound);
-	    return setsFound.length;
-	    // return 10;
+	    return setsFound;
 	 },
 
 	 shuffleDealtCards(cardList, cardData) {

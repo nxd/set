@@ -49,7 +49,7 @@ class App extends React.Component {
     while(nSets<this.state.minSets && attempts<this.state.maxAttempts) {
       console.log(`Generation attempt: ${attempts +1}`)
       cardList = GameLogic.dealCards(this.state.numCards);
-      nSets = GameLogic.findSets(cardList);
+      nSets = GameLogic.findSets(cardList).length;
       attempts++
     }
 
