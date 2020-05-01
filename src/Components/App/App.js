@@ -24,6 +24,7 @@ class App extends React.Component {
       numCards: 12,
       minSets: 5,
       maxAttempts: 500,
+      easyMode: true,
       cardList: [0,0,0,0,0,0,0,0,0],
       cardData: [],
       allSets: [],
@@ -53,7 +54,7 @@ class App extends React.Component {
 
     while(nSets<this.state.minSets && attempts<this.state.maxAttempts) {
       console.log(`Generation attempt: ${attempts +1}`)
-      cardList = GameLogic.dealCards(this.state.numCards);
+      cardList = GameLogic.dealCards(this.state.numCards, this.state.easyMode);
       allSets = GameLogic.findSets(cardList);
       nSets = allSets.length;
       attempts++

@@ -6,35 +6,76 @@ const GameLogic = {
 		return array.sort(() => Math.random() - 0.5);
 	},
 
-	dealCards(numCards) {
+	randomizeEasyMode(cardList) {
+		// this method randomizes which dimension is dropped when Easy mode is On
+
+		// randomly select dropped dim 0-3
+		let dropDim = Math.floor(Math.random() * 4);
+		// randomly select what that dropped dim should be fixed to
+		let fixedDim = Math.floor(Math.random() * 3);
+
+		
+		let newCardList = []
+		for(let ii=0; ii<cardList.length; ii++) {
+			//calculate card dims based on card numbers
+			let newDim = this.calcCardDim(cardList[ii])
+			// drop first dim, which is the default 0 value
+			newDim.shift();
+			// insert a 0 in the dropDim spot to make it the dropped dimension
+			newDim.splice(dropDim, 0, fixedDim)
+
+			// calculate new card num based on dims
+			let cardNum = newDim[0]*27 + newDim[1]*9 + newDim[2]*3 + newDim[3] + 1;
+
+			// insert into newCardList array
+			newCardList.push(cardNum);
+		}
+
+		return(newCardList);
+
+	},
+
+	dealCards(numCards, easyMode=false) {
+
+		//if easy mode is enabled, reduce number of cards to 27 (3-dim)
+		let deckSize = 81;
+		if(easyMode){
+			deckSize = 27;
+		}
+
 		var cardList = [];
 		while(cardList.length < numCards){
-		    var newCardNum = Math.floor(Math.random() * 81) + 1;
+		    var newCardNum = Math.floor(Math.random() * deckSize) + 1;
 		    if(cardList.indexOf(newCardNum) === -1) cardList.push(newCardNum);
+		}
+
+		// randomize dropped dim
+		if(easyMode){
+			cardList = this.randomizeEasyMode(cardList);
 		}
 
 		return(cardList)   
 	},
 
-	calcCardDims(cardList) {
-		let cardDims = []
-		for (var i = 0; i < cardList.length; i++) {
-		  let x = cardList[i] - 1;
-		  let d1 = parseInt(x/27);
-		  let d2 = parseInt((x-27*d1)/9);
-		  let d3 = parseInt((x-27*d1-9*d2)/3);
-		  let d4 = x%3;
+	// calcCardDims(cardList) {
+	// 	let cardDims = []
+	// 	for (var i = 0; i < cardList.length; i++) {
+	// 	  let x = cardList[i] - 1;
+	// 	  let d1 = parseInt(x/27);
+	// 	  let d2 = parseInt((x-27*d1)/9);
+	// 	  let d3 = parseInt((x-27*d1-9*d2)/3);
+	// 	  let d4 = x%3;
 
-		  let newDims = [d1,d2,d3,d4];
-		  // console.log('Card number:')
-		  // console.log(cardList[i])
-		  // console.log('Card dimensions:')
-		  // console.log(newDims)
+	// 	  let newDims = [d1,d2,d3,d4];
+	// 	  // console.log('Card number:')
+	// 	  // console.log(cardList[i])
+	// 	  // console.log('Card dimensions:')
+	// 	  // console.log(newDims)
 
-		  cardDims.push(newDims)
-		}
-		return cardDims;
-	},
+	// 	  cardDims.push(newDims)
+	// 	}
+	// 	return cardDims;
+	// },
 
 	calcCardDim(cardNum) {
 		  let x = cardNum - 1;
