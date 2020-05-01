@@ -57,7 +57,7 @@ const GameLogic = {
 		}
 	},
 
-	initializeDeck(cardList) {
+	defineCardData(cardList) {
 		let cardData = []
 		for (var i = 0; i < cardList.length; i++) {
 			let card = this.initializeCard(cardList[i]);
@@ -132,7 +132,7 @@ const GameLogic = {
 	    			if(this.allDifferent([c1,c2,c3])){
 	    				var selectedSet = [cardList[c1], cardList[c2], cardList[c3]]
 	    				if(this.checkMatch(selectedSet)){
-	    					selectedSet.sort()
+	    					selectedSet.sort(function(a, b){return a-b})
 	    					// console.log(`Sets found so far: ${setsFound}`)
 	    					// console.log(`New set found: ${selectedSet}`)
 	    					// console.log(setsFound)
@@ -180,6 +180,24 @@ const GameLogic = {
 	 	return [newCardList, newCardData];
 
 
+	 },
+
+
+	 findMissingSets(allSets, foundSets) {
+	 	// this function returns any unfound SETs, given a list of
+	 	// all SET solutions and list of found Sets
+	 	// items in sets should already be sorted by this point
+	 	// so no additional sorting operations needed
+
+	 	var missingSets = [];
+
+	 	for(let ii=0; ii < allSets.length; ii++) {
+	 		if(!this.isSetinArray(foundSets, allSets[ii])){
+	 			missingSets.push(allSets[ii]);
+	 		}
+	 	}
+
+	 	return(missingSets);
 	 }
 
 

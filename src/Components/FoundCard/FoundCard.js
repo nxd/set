@@ -25,9 +25,10 @@ class FoundCard extends React.Component {
 	render(){
 
 		let status = this.props.empty ? 'empty' : 'found';
+		let quit = this.props.quit ? 'quit' : '';
 
 		return (
-			<div className={`foundCard ${status}`}>
+			<div className={`foundCard ${status} ${quit}`}>
 				{this.getShapes()}
 			</div>
 		)

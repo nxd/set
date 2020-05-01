@@ -21,3 +21,8 @@
 	opacity: 75%;
 }
 
+.quit{
+	background-color: hsla(0,60%, 80%, 20%);
+	border: .8px solid red;
+}
+

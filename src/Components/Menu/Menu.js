@@ -83,15 +83,17 @@ class Menu extends React.Component {
 					</div>
 				</div>
 
+
 				<div className='submenu-group'>
 					<h1 id='timerDisplay'>00:00</h1>
 				</div>
+
 
 				<div className={'submenu-group '}>
 					
 					<div className={`menu-button ${solveButtonVis}`}
 						id='solveButton'
-						onClick={this.props.newGame}
+						onClick={this.props.solveGame}
 					>
 						<img src={solveButtonSrc}/>
 					</div>

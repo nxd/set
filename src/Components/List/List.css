@@ -9,6 +9,7 @@
 
 .setList{
 	justify-content: flex-start;
+	margin-bottom: 15px;
 }
 
 .setList h3 {

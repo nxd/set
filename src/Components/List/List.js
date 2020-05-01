@@ -32,9 +32,28 @@ class List extends React.Component {
 		return rowsFound;
 	}
 
+	renderQuitSets() {
+		let quitSets = this.props.quitSets;
+		var rowsQuit = [];
+
+		for (var j = 0; j < quitSets.length; j++){
+			let quitSet = quitSets[j].sort(function(a, b){return a-b});
+
+			let renderedSet = quitSet.map(cardNum => {
+				return <FoundCard value={cardNum} quit={true}/>
+			});
+
+			renderedSet = <div className='foundSet card-set'>{renderedSet}</div>
+
+			rowsQuit.push(renderedSet);
+		}
+
+		return rowsQuit;
+	}
+
 	renderRemainingSets() {
 
-		const nRemaining = this.props.nSets - this.props.foundSets.length
+		const nRemaining = this.props.nSets - this.props.foundSets.length - this.props.quitSets.length
 		var rowsRemaining = [];
 
 		const emptyRow = (
@@ -59,6 +78,7 @@ class List extends React.Component {
 
 				{this.renderFoundSets()}
 				{this.renderRemainingSets()}
+				{this.renderQuitSets()}
 
 			</div>
 		)

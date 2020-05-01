@@ -18,16 +18,19 @@ class App extends React.Component {
         pregame: true,
         active: false,
         paused: false,
-        postgame: false
+        postgame: false,
+        solved: false
       },
       numCards: 12,
       minSets: 5,
       maxAttempts: 500,
       cardList: [0,0,0,0,0,0,0,0,0],
       cardData: [],
+      allSets: [],
       nSets: 0,
       nFound: 0,
       foundSets: [],
+      quitSets: [],
       selectedCards: [],
       message: {
         type: 'empty-msg',
@@ -39,22 +42,25 @@ class App extends React.Component {
     this.selectCard = this.selectCard.bind(this);
     this.pauseGame = this.pauseGame.bind(this);
     this.shuffleCards = this.shuffleCards.bind(this);
+    this.solveGame = this.solveGame.bind(this);
   }
 
   generateNewGame() {
     var cardList;
+    var allSets;
     var nSets = 0;
     var attempts = 0;
 
     while(nSets<this.state.minSets && attempts<this.state.maxAttempts) {
       console.log(`Generation attempt: ${attempts +1}`)
       cardList = GameLogic.dealCards(this.state.numCards);
-      nSets = GameLogic.findSets(cardList).length;
+      allSets = GameLogic.findSets(cardList);
+      nSets = allSets.length;
       attempts++
     }
 
-    // let cardDims = GameLogic.calcCardDims(cardList);
-    let cardData = GameLogic.initializeDeck(cardList);
+    // define card meta data based on list of card numbers
+    let cardData = GameLogic.defineCardData(cardList);
 
     // clear any existing messages
     var message = {
@@ -67,16 +73,20 @@ class App extends React.Component {
         pregame: false,
         active: true,
         paused: false,
-        postgame: false
+        postgame: false,
+        solved: false
       },
       selectedCards: [],
       cardList:cardList,
+      allSets:allSets,
       nSets:nSets,
       cardData:cardData,
       foundSets: [],
+      quitSets: [],
       message: message
     });
   }
+
 
   pauseGame(){
     let pauseState = this.state.gameStatus.paused;
@@ -84,9 +94,11 @@ class App extends React.Component {
         pregame: false,
         active: pauseState,
         paused: !pauseState,
-        postgame: false
+        postgame: false,
+        solved: false
     }});
   }
+
 
   shuffleCards() {
 
@@ -97,6 +109,7 @@ class App extends React.Component {
       cardData: newCardData
     })
   }
+
 
   selectCard(cardNum) {
     // only proceed if game is active
@@ -128,7 +141,6 @@ class App extends React.Component {
       });
     }
 
-
     // add or remove clicked card from selected card list
     let selectedCards = this.state.selectedCards
 
@@ -154,7 +166,7 @@ class App extends React.Component {
           // console.log(this.state.selectedCards)
           // check if already found, otherwise add to found list
           let foundSets = this.state.foundSets;
-          if(!Helper.isSetinArray(foundSets, selectedCards.sort())){
+          if(!GameLogic.isSetinArray(foundSets, selectedCards.sort())){
             foundSets.push(selectedCards.sort())
             console.log(`found sets = ${foundSets.length}`)
             // if founds Sets is complete, set endgame message
@@ -169,7 +181,8 @@ class App extends React.Component {
                   pregame: false,
                   active: false,
                   paused: false,
-                  postgame: true
+                  postgame: true,
+                  solved: false
                 }
               });
               return;
@@ -236,6 +249,29 @@ class App extends React.Component {
     })
   }
 
+  solveGame() {
+
+    let quitSets = GameLogic.findMissingSets(this.state.allSets, this.state.foundSets);
+
+    this.setState({
+      gameStatus: {
+        pregame: false,
+        active: false,
+        paused: false,
+        postgame: true,
+        solved: true
+      },
+      quitSets: quitSets,
+      message: {
+        type: 'failure-msg',
+        content: 'Better Luck Next Time!'
+      }
+
+    })
+
+  }
+
+
   render() {
     return(
       <div className="App">
@@ -243,6 +279,7 @@ class App extends React.Component {
           newGame = {this.generateNewGame}
           pauseGame = {this.pauseGame}
           shuffleCards = {this.shuffleCards}
+          solveGame = {this.solveGame}
           gameStatus = {this.state.gameStatus}
         />
         <div className='cards-container'>
@@ -260,6 +297,7 @@ class App extends React.Component {
               gameStatus = {this.state.gameStatus}
               nSets={this.state.nSets}
               foundSets={this.state.foundSets} 
+              quitSets={this.state.quitSets} 
             />
           </div>
         </div>
