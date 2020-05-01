@@ -82,10 +82,12 @@ class Menu extends React.Component {
 						<img src={shuffleButtonSrc}/>
 					</div>
 				</div>
+
 				<div className='submenu-group'>
 					<h1 id='timerDisplay'>00:00</h1>
 				</div>
-				<div className={'submenu-group dropdown'}>
+
+				<div className={'submenu-group '}>
 					
 					<div className={`menu-button ${solveButtonVis}`}
 						id='solveButton'
@@ -98,15 +100,37 @@ class Menu extends React.Component {
 					>
 						<img src={helpButtonSrc}/>
 					</div>
-					<div id='settingsButton' className='menu-button'>
+					<div id='settingsButton' className='menu-button dropdown'>
 						<img src={menuButtonSrc}/>
 						<div className='dropdown-content'>
+							<h3 className='setting-title'>Game Options</h3>
+
 							<div className='settings-row'>
-								<p>game mode:</p>
-								<button>+</button>
-								<p>4</p>
-								<button>-</button>
+								<div className='settings-row-section'>
+									<p>Easy Mode:</p>
+								</div>
+								<div className='settings-row-section'>
+									<label className="switch">
+									  <input type="checkbox"/>
+									  <span className="slider round"></span>
+									</label>
+								</div>
+								
 							</div>
+
+							<div className='settings-row'>
+								<div className='settings-row-section'>
+									<p>Enable Timer:</p>
+								</div>
+								<div className='settings-row-section'>
+									<label className="switch">
+									  <input type="checkbox"/>
+									  <span className="slider round"></span>
+									</label>
+								</div>
+								
+							</div>
+
 							<div className='settings-row'>
 								<p>cards:</p>
 								<button>+</button>
