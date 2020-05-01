@@ -6,19 +6,11 @@ class Card extends React.Component {
 	constructor(props){
 		super(props);
 
-		this.state = {
-			status: 'inactive'
-		}
-
 		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleClick(e){
-		var newStatus = (this.state.status === 'active') ? 'inactive': 'active';
-		// let cardNum = e.target.cardNum
-		// console.log(e.target)
 		this.props.onCardSelect(this.props.cardData.number);
-		this.setState({status:newStatus});
 	}
 
 	getShapes() {
@@ -47,9 +39,11 @@ class Card extends React.Component {
 		}
 
 		return (
-			<div className={`card ${status}`} onClick={this.handleClick} cardNum={this.props.value}>
-			        {this.getShapes()}
-				
+			<div 
+				className={`card ${status}`} 
+				onClick={this.handleClick}
+			>
+				{this.getShapes()}
 			</div>
 		)
 	}
