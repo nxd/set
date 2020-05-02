@@ -62,7 +62,7 @@ class Menu extends React.Component {
 		return (
 			
 			<div className='menu'>
-				<div className='submenu-group'>
+				<div className='submenu-group button-group'>
 					<div className={`menu-button ${pauseButtonVis}`}
 						id='pauseButton'
 						onClick={this.props.pauseGame}
@@ -84,12 +84,12 @@ class Menu extends React.Component {
 				</div>
 
 
-				<div className='submenu-group'>
+				<div className='submenu-group timer-group'>
 					<h1 id='timerDisplay'>00:00</h1>
 				</div>
 
 
-				<div className={'submenu-group '}>
+				<div className='submenu-group button-group button-group-right'>
 					
 					<div className={`menu-button ${solveButtonVis}`}
 						id='solveButton'

@@ -11,6 +11,18 @@
 	justify-content: flex-start;
 }
 
+.timer-group {
+	flex:1;
+}
+
+.button-group {
+	flex: 2;
+}
+
+.button-group-right {
+	justify-content: flex-end;
+}
+
 .menu-button {
 	background-color: white;
 	border: 1px solid black;
