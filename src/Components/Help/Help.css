@@ -1,0 +1,17 @@
+.help-container {
+  display: block;
+  position: fixed;
+  margin-left:auto;
+  width:70%;
+  margin-right:auto;
+  height: 500px;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #EEE;
+  z-index: 2;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 6px;
+}

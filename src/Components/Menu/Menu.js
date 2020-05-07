@@ -99,6 +99,7 @@ class Menu extends React.Component {
 					</div>
 					<div className={`menu-button ${helpButtonVis}`}
 						id='helpButton'
+						onClick={this.props.toggleHelp}
 					>
 						<img src={helpButtonSrc}/>
 					</div>

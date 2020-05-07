@@ -5,6 +5,7 @@ import Menu from '../Menu/Menu.js';
 import Message from '../Message/Message.js';
 import Board from '../Board/Board.js';
 import List from '../List/List.js';
+import Help from '../Help/Help.js';
 
 import GameLogic from '../../utils/GameLogic.js';
 import Helper from '../../utils/Helper.js';
@@ -21,10 +22,11 @@ class App extends React.Component {
         postgame: false,
         solved: false
       },
-      numCards: 12,
-      minSets: 5,
+      numCards: 9,
+      minSets: 4,
       maxAttempts: 500,
-      easyMode: true,
+      easyMode: false,
+      showHelp: false,
       cardList: [0,0,0,0,0,0,0,0,0],
       cardData: [],
       allSets: [],
@@ -44,6 +46,7 @@ class App extends React.Component {
     this.pauseGame = this.pauseGame.bind(this);
     this.shuffleCards = this.shuffleCards.bind(this);
     this.solveGame = this.solveGame.bind(this);
+    this.toggleHelp = this.toggleHelp.bind(this);
   }
 
   generateNewGame() {
@@ -98,6 +101,14 @@ class App extends React.Component {
         postgame: false,
         solved: false
     }});
+  }
+
+  toggleHelp(){
+    // if game active, pause and active help
+    // otherwise, hide help and unpause
+    this.pauseGame();
+    var currentHelp = this.state.showHelp;
+    this.setState({showHelp:!currentHelp})
   }
 
 
@@ -282,8 +293,13 @@ class App extends React.Component {
           shuffleCards = {this.shuffleCards}
           solveGame = {this.solveGame}
           gameStatus = {this.state.gameStatus}
+          toggleHelp = {this.toggleHelp}
         />
         <div className='cards-container'>
+          <Help 
+            showHelp={this.state.showHelp}
+            toggleHelp = {this.toggleHelp}
+          />
           <div className='left-panel'>
             <Message message={this.state.message}/>
             <Board 
