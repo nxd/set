@@ -17,6 +17,8 @@ class Settings extends React.Component {
 		this.revertStateToProps = this.revertStateToProps.bind(this);
 		this.toggleEasyMode = this.toggleEasyMode.bind(this);
 		this.toggleTimer = this.toggleTimer.bind(this);
+		this.cancelChanges = this.cancelChanges.bind(this);
+		this.changeValue = this.changeValue.bind(this);
 	}
 
 	static getDerivedStateFromProps(props, state) {
@@ -85,6 +87,25 @@ class Settings extends React.Component {
 		console.log('clicked Timer switch')
 	}
 
+	cancelChanges(){
+		// revert state back to props 
+		this.revertStateToProps()
+		// close settings window
+		this.props.toggleSettings();
+	}
+
+	changeValue(stateValName, delta){
+		//this function changes a state value by delta amount
+		if(stateValName==='numCards'){
+			let curVal = this.state.numCards;
+			this.setState({numCards:(curVal + delta)});
+		}
+		if(stateValName==='minSets'){
+			let curVal = this.state.minSets;
+			this.setState({minSets:(curVal + delta)});
+		}
+	}
+
 	renderSettingsWindow(){
 		if(this.props.showSettings){
 			return(
@@ -122,9 +143,9 @@ class Settings extends React.Component {
 									<p># of cards:</p>
 								</div>
 								<div className='settings-row-section up-down-selector'>
-									<button>-</button>
+									<button onClick={() => this.changeValue('numCards', -1)}>-</button>
 									<p>{this.state.numCards}</p>
-									<button>+</button>
+									<button onClick={() => this.changeValue('numCards', 1)}>+</button>
 								</div>
 							</div>
 
@@ -133,14 +154,17 @@ class Settings extends React.Component {
 									<p># of SETs:</p>
 								</div>
 								<div className='settings-row-section up-down-selector'>
-									<button>-</button>
+									<button onClick={() => this.changeValue('minSets', -1)}>-</button>
 									<p>{this.state.minSets}</p>
-									<button>+</button>
+									<button onClick={() => this.changeValue('minSets', 1)}>+</button>
 								</div>
 							</div>
 
 							<div className='settings-row'>
-								<div className='settings-btn settings-accept-btn'>
+								<div 
+									className='settings-btn settings-accept-btn'
+									onClick={() => this.props.updateSettings(this.state)}
+								>
 									Apply Settings
 								</div>
 							</div>
@@ -148,7 +172,7 @@ class Settings extends React.Component {
 							<div className='settings-row'>
 								<div 
 									className='settings-btn settings-cancel-btn'
-									onClick={this.props.toggleSettings}
+									onClick={this.cancelChanges}
 								>
 									Cancel
 								</div>

@@ -51,6 +51,7 @@ class App extends React.Component {
     this.solveGame = this.solveGame.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
   }
 
   generateNewGame() {
@@ -126,6 +127,20 @@ class App extends React.Component {
     this.pauseGame();
     var currentSettings = this.state.showSettings;
     this.setState({showSettings:!currentSettings})
+  }
+
+  updateSettings(newSettings){
+    //updates numCards, minSets, easyMode, and/or showTimer
+    //the starts a new game
+    this.setState({
+      numCards: newSettings['numCards'],
+      minSets: newSettings['minSets'],
+      easyMode: newSettings['easyMode'],
+      showTimer: newSettings['showTimer'],
+    }, () => {
+      this.toggleSettings();
+      this.generateNewGame();
+    })
   }
 
 
@@ -321,6 +336,7 @@ class App extends React.Component {
             showTimer={this.state.showTimer}
             showSettings={this.state.showSettings}
             toggleSettings = {this.toggleSettings}
+            updateSettings = {this.updateSettings}
           />
           <Help 
             showHelp={this.state.showHelp}
