@@ -5,6 +5,7 @@ import Menu from '../Menu/Menu.js';
 import Message from '../Message/Message.js';
 import Board from '../Board/Board.js';
 import List from '../List/List.js';
+import Settings from '../Settings/Settings.js';
 import Help from '../Help/Help.js';
 
 import GameLogic from '../../utils/GameLogic.js';
@@ -25,8 +26,10 @@ class App extends React.Component {
       numCards: 9,
       minSets: 4,
       maxAttempts: 500,
-      easyMode: false,
+      easyMode: true,
       showHelp: false,
+      showSettings: false,
+      showTimer: true,
       cardList: [0,0,0,0,0,0,0,0,0],
       cardData: [],
       allSets: [],
@@ -47,6 +50,7 @@ class App extends React.Component {
     this.shuffleCards = this.shuffleCards.bind(this);
     this.solveGame = this.solveGame.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
   }
 
   generateNewGame() {
@@ -93,6 +97,11 @@ class App extends React.Component {
 
 
   pauseGame(){
+    //pause should not do anything is pregame, settings, or help mode
+    if(this.state.gameStatus.pregame){
+      return;
+    }
+
     let pauseState = this.state.gameStatus.paused;
     this.setState({gameStatus: {
         pregame: false,
@@ -109,6 +118,14 @@ class App extends React.Component {
     this.pauseGame();
     var currentHelp = this.state.showHelp;
     this.setState({showHelp:!currentHelp})
+  }
+
+  toggleSettings(){
+    // if game active, pause and active help
+    // otherwise, hide help and unpause
+    this.pauseGame();
+    var currentSettings = this.state.showSettings;
+    this.setState({showSettings:!currentSettings})
   }
 
 
@@ -294,8 +311,17 @@ class App extends React.Component {
           solveGame = {this.solveGame}
           gameStatus = {this.state.gameStatus}
           toggleHelp = {this.toggleHelp}
+          toggleSettings = {this.toggleSettings}
         />
         <div className='cards-container'>
+          <Settings 
+            numCards={this.state.numCards}
+            minSets={this.state.minSets}
+            easyMode={this.state.easyMode}
+            showTimer={this.state.showTimer}
+            showSettings={this.state.showSettings}
+            toggleSettings = {this.toggleSettings}
+          />
           <Help 
             showHelp={this.state.showHelp}
             toggleHelp = {this.toggleHelp}

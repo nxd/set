@@ -97,59 +97,23 @@ class Menu extends React.Component {
 					>
 						<img src={solveButtonSrc}/>
 					</div>
+
 					<div className={`menu-button ${helpButtonVis}`}
 						id='helpButton'
 						onClick={this.props.toggleHelp}
 					>
 						<img src={helpButtonSrc}/>
 					</div>
-					<div id='settingsButton' className='menu-button dropdown'>
+
+					<div 
+						id='settingsButton' 
+						className='menu-button dropdown'
+						onClick={this.props.toggleSettings}
+					>
 						<img src={menuButtonSrc}/>
-						<div className='dropdown-content'>
-							<h3 className='setting-title'>Game Options</h3>
-
-							<div className='settings-row'>
-								<div className='settings-row-section'>
-									<p>Easy Mode:</p>
-								</div>
-								<div className='settings-row-section'>
-									<label className="switch">
-									  <input type="checkbox"/>
-									  <span className="slider round"></span>
-									</label>
-								</div>
-								
-							</div>
-
-							<div className='settings-row'>
-								<div className='settings-row-section'>
-									<p>Enable Timer:</p>
-								</div>
-								<div className='settings-row-section'>
-									<label className="switch">
-									  <input type="checkbox"/>
-									  <span className="slider round"></span>
-									</label>
-								</div>
-								
-							</div>
-
-							<div className='settings-row'>
-								<p>cards:</p>
-								<button>+</button>
-								<p>4</p>
-								<button>-</button>
-							</div>
-							<div className='settings-row'>
-								<p>SETs:</p>
-								<button>+</button>
-								<p>4</p>
-								<button>-</button>
-							</div>
-						</div>
 					</div>
-				</div>
 				
+				</div>
 			</div>
 
 		)
