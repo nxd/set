@@ -39,3 +39,7 @@
 .status-hidden{
 	visibility: hidden;
 }
+
+div.status-hidden{
+	display: none;
+}

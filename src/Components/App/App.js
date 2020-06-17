@@ -7,6 +7,7 @@ import Board from '../Board/Board.js';
 import List from '../List/List.js';
 import Settings from '../Settings/Settings.js';
 import Help from '../Help/Help.js';
+import StartBoard from '../StartBoard/StartBoard.js';
 
 import GameLogic from '../../utils/GameLogic.js';
 import Helper from '../../utils/Helper.js';
@@ -129,7 +130,7 @@ class App extends React.Component {
     this.setState({showSettings:!currentSettings})
   }
 
-  updateSettings(newSettings){
+  updateSettings(newSettings, doToggle){
     //updates numCards, minSets, easyMode, and/or showTimer
     //the starts a new game
     this.setState({
@@ -138,7 +139,9 @@ class App extends React.Component {
       easyMode: newSettings['easyMode'],
       showTimer: newSettings['showTimer'],
     }, () => {
-      this.toggleSettings();
+      if(doToggle){
+        this.toggleSettings();
+      }
       this.generateNewGame();
     })
   }
@@ -327,6 +330,10 @@ class App extends React.Component {
           gameStatus = {this.state.gameStatus}
           toggleHelp = {this.toggleHelp}
           toggleSettings = {this.toggleSettings}
+        />
+        <StartBoard 
+          pregame={this.state.gameStatus.pregame}
+          updateSettings={this.updateSettings}
         />
         <div className='cards-container'>
           <Settings 

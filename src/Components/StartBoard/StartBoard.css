@@ -1,0 +1,42 @@
+.pregame-btn-row-container {
+	display: flex;
+	justify-content: center;
+}
+
+.pregame-btn-row{
+	display: flex;
+	justify-content: space-around;
+	width: 60%;
+	min-width: 400px;
+	margin-bottom: 50px;
+}
+
+.pregame-btn {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	display: inline-block;
+	margin: 6px 10px;
+	padding: 10px 10px;
+	width: 20%;
+	cursor: pointer;
+}
+
+.pregame-btn:hover {
+	border: 1px solid orange;
+	background-color: #fff6e7;
+}
+
+.pregame-btn:active {
+	background-color: #ffdb9a;
+}
+
+.set-svg-container {
+	width: 100%;
+}
+
+.set-svg-container svg{
+	width: 60%;
+	max-width: 400px;
+	margin: 75px 0px;
+}

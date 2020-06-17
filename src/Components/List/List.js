@@ -73,7 +73,7 @@ class List extends React.Component {
 
 	render(){
 		return (
-			<div className='setList'>
+			<div className={`setList ${this.isPregame()}`}>
 				<h3 className={`found-status ${this.isPregame()}`}>{this.props.foundSets.length} of {this.props.nSets} SETs found</h3>
 
 				{this.renderFoundSets()}

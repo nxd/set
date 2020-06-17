@@ -163,7 +163,7 @@ class Settings extends React.Component {
 							<div className='settings-row'>
 								<div 
 									className='settings-btn settings-accept-btn'
-									onClick={() => this.props.updateSettings(this.state)}
+									onClick={() => this.props.updateSettings(this.state, true)}
 								>
 									Apply Settings
 								</div>
