@@ -39,54 +39,85 @@ const setSvg =
 			/>
 	</svg>
 
+const gameModeSettings = {
+	easy: {
+		numCards: 9,
+		minSets: 4,
+		easyMode: true,
+		numAttr: 3,
+		showTimer: false,
+		timerLabel: 'no timer'
+	},
+	normal: {
+		numCards: 12,
+		minSets: 6,
+		easyMode: false,
+		numAttr: 4,
+		showTimer: true,
+		timerLabel: 'timer on'
+	},
+	hard: {
+		numCards: 15,
+		minSets: 8,
+		easyMode: false,
+		numAttr: 4,
+		showTimer: true,
+		timerLabel: 'timer on'
+	}
+}
+
 
 class StartBoard extends React.Component {
 
 	constructor(props) {
 		super(props);
 
-		this.startEasy = this.startEasy.bind(this);
-		this.startMed = this.startMed.bind(this);
-		this.startHard = this.startHard.bind(this);
+		this.state = {
+			hoverMode: null
+		}
+
+		this.startGame = this.startGame.bind(this);
+
+		this.setHoverMode = this.setHoverMode.bind(this);
 	}
 
-	startEasy() {
+	startGame(mode){
+
+		let modeSettings = gameModeSettings[mode];
 
 		let newSettings = {
-			numCards: 9,
-			minSets: 4,
-			easyMode: true,
-			showTimer: true,
+			numCards: modeSettings.numCards,
+			minSets: modeSettings.minSets,
+			easyMode: modeSettings.easyMode,
+			showTimer: modeSettings.showTimer,
 		}
 
 		this.props.updateSettings(newSettings, false);
 
 	}
 
-	startMed() {
-
-		let newSettings = {
-			numCards: 12,
-			minSets: 6,
-			easyMode: false,
-			showTimer: true,
-		}
-
-		this.props.updateSettings(newSettings, false);
-
+	setHoverMode(mode) {
+		this.setState({
+			hoverMode: mode
+		})
 	}
 
-	startHard() {
+	renderDescriptions(mode) {
 
-		let newSettings = {
-			numCards: 15,
-			minSets: 8,
-			easyMode: false,
-			showTimer: true,
+		if(mode == null) {
+			return(null);
 		}
 
-		this.props.updateSettings(newSettings, false);
+		let modeSettings = gameModeSettings[mode];
 
+		return(
+			<ul className='pregame-mode-list'>
+				<li className='pregame-mode-item'>{modeSettings.numAttr} attributes</li>
+				<li className='pregame-mode-item'>{modeSettings.numCards} cards</li>
+				<li className='pregame-mode-item'>{modeSettings.minSets}</li>
+				<li className='pregame-mode-item'>{modeSettings.timerLabel}</li>
+			</ul>
+		)		
 	}
 
 	renderStartBoard() {
@@ -98,10 +129,34 @@ class StartBoard extends React.Component {
 					</div>
 					<div className='pregame-btn-row-container'>
 						<div className='pregame-btn-row'>
-							<div className='pregame-btn' onClick={this.startEasy}>Easy</div>
-							<div className='pregame-btn' onClick={this.startMed}>Normal</div>
-							<div className='pregame-btn' onClick={this.startHard}>Hard</div>
+							<div 
+								className='pregame-btn' 
+								onClick= {() => this.startGame('easy')}
+								onMouseEnter= {() => this.setHoverMode('easy')}
+								onMouseLeave={() => this.setHoverMode()}
+							>
+								Easy
+							</div>
+							<div 
+								className='pregame-btn' 
+								onClick= {() => this.startGame('normal')}
+								onMouseEnter= {() => this.setHoverMode('normal')}
+								onMouseLeave={() => this.setHoverMode()}
+							>
+								Normal
+							</div>
+							<div 
+								className='pregame-btn' 
+								onClick= {() => this.startGame('hard')}
+								onMouseEnter= {() => this.setHoverMode('hard')}
+								onMouseLeave={() => this.setHoverMode()}
+							>
+								Hard
+							</div>
 						</div>
+					</div>
+					<div className='pregame-mode-container'>
+						{this.renderDescriptions(this.state.hoverMode)}
 					</div>
 				</div>
 			)
