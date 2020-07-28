@@ -16,7 +16,7 @@
 }
 
 .empty{
-	background-color: #ccc;
+	background-color: var(--dim-gray);
 	border: none;
 	opacity: 75%;
 }

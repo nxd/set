@@ -3,6 +3,13 @@
 	justify-content: center;
 }
 
+:root {
+  --set-red: rgb(221, 78, 74);
+  --set-green: rgb(80, 176, 99);
+  --set-blue: rgb(69, 48, 141);
+  --dim-gray: #ccc;
+}
+
 .App {
 	margin: 20px 0px;
 	text-align: center;
@@ -11,7 +18,7 @@
 	display: flex;
 	flex-direction: column;
 	max-width: 1000px;
-	min-width: 480px;
+	min-width: 400px;
 	background-color: #EEE;
 }
 

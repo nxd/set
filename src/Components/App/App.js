@@ -8,9 +8,11 @@ import List from '../List/List.js';
 import Settings from '../Settings/Settings.js';
 import Help from '../Help/Help.js';
 import StartBoard from '../StartBoard/StartBoard.js';
+import Endgame from '../Endgame/Endgame.js';
 
 import GameLogic from '../../utils/GameLogic.js';
 import Helper from '../../utils/Helper.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -348,6 +350,10 @@ class App extends React.Component {
           <Help 
             showHelp={this.state.showHelp}
             toggleHelp = {this.toggleHelp}
+          />
+          <Endgame 
+            showEnd={this.state.gameStatus.postgame}
+            // toggleEnd = {this.toggleHelp}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>
