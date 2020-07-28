@@ -33,7 +33,7 @@ class Help extends React.Component {
 					</div>
 
 					<div className='help-content' >
-						<p>SET is a matching game. Each round, a random selection of cards are dealt. Find all SETs to win.</p>
+						<p>SET is a matching game. Each round, a random selection of cards is dealt. Find all SETs to win.</p>
 						
 						<p>Card have 4 attributes that come in 3 variations.</p>
 						<ul className='help-ul'>

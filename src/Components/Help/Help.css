@@ -34,7 +34,7 @@
 .exit-help-btn {
   margin: 8px;
   padding: 1px;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: #BBB;
   color: #EEE;
   height: 1rem;
@@ -88,15 +88,15 @@
 } 
 
 .red-box {
-  background-color: red;
+  background-color: var(--set-red);
 }
 
 .green-box {
-  background-color: green;
+  background-color: var(--set-green);
 }
 
 .blue-box {
-  background-color: blue;
+  background-color: var(--set-blue);
 }
 
 .help-shape {
