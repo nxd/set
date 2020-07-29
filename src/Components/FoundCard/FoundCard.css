@@ -15,10 +15,10 @@
 	width: 28%;
 }
 
-.empty{
+.empty-card{
 	background-color: var(--dim-gray);
 	border: none;
-	opacity: 75%;
+	/*opacity: 100%;*/
 }
 
 .quit{

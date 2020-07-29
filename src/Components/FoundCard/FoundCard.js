@@ -24,7 +24,7 @@ class FoundCard extends React.Component {
 
 	render(){
 
-		let status = this.props.empty ? 'empty' : 'found';
+		let status = this.props.empty ? 'empty-card' : 'found-card';
 		let quit = this.props.quit ? 'quit' : '';
 
 		return (

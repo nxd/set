@@ -7,7 +7,7 @@
   --set-red: rgb(221, 78, 74);
   --set-green: rgb(80, 176, 99);
   --set-blue: rgb(69, 48, 141);
-  --dim-gray: #ccc;
+  --dim-gray: #cccccc;
 }
 
 .App {
