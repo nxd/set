@@ -353,7 +353,8 @@ class App extends React.Component {
           />
           <Endgame 
             showEnd={this.state.gameStatus.postgame}
-            // toggleEnd = {this.toggleHelp}
+            newGame = {this.generateNewGame}
+            nSets={this.state.nSets}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>

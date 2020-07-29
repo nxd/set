@@ -1,10 +1,10 @@
-.help-container {
+.end-container {
   display: block;
   position: fixed;
   margin-left:auto;
-  width: 400px;
+  width: 250px;
   margin-right:auto;
-  height: 540px;
+  height: 200px;
   top: 90px;
   left: 0;
   right: 0;
@@ -17,22 +17,16 @@
   cursor: default;
 }
 
-.help-header {
+.end-header {
   display: inline-flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
+  border: 1px solid blue;
 }
 
-.help-title {
-  width: 95%
-}
-
-.help-title h3{
-  margin-bottom: 0;
-}
-
-.exit-help-btn {
-  margin: 8px;
+.exit-end-btn {
+  margin-top: 6px;
+  margin-right: 6px;
   padding: 1px;
   border-radius: 6px;
   background-color: #BBB;
@@ -43,82 +37,43 @@
   cursor: pointer;
 }
 
-.help-header-spacer {
-  visibility: hidden;
+.end-content {
+  
 }
 
-.help-content p {
-  margin: 20px;
-  text-align: justify;
-}
-
-.help-ul {
-  list-style-type: disc;
-  margin: 0 30px;
-}
-
-.help-li {
-  margin: 16px 10px;
-}
-
-.help-li-content {
-  display: flex;
-}
-.attr-name {
-  flex:1;
-  font-weight: bold;
-}
-
-.attr-values {
-  flex:3;
-  display: inline-flex;
-  justify-content: space-around;
-}
-
-.attr-val {
-  width: 30%;
-  display: flex;
-  justify-content: center;
-}
-
-.color-box {
-  height: 1.1rem;
-  width: 1.1rem;
-  border-radius: 3px;
-} 
-
-.red-box {
-  background-color: var(--set-red);
-}
-
-.green-box {
-  background-color: var(--set-green);
-}
-
-.blue-box {
-  background-color: var(--set-blue);
-}
-
-.help-shape {
-  height: 1.8rem;
-  margin:0;
-}
-
-.help-pattern-box {
-  height: 1.2rem;
-  margin: 0;
-}
-
-.about-game {
-  margin-top: 40px;
-  margin-bottom: 0;
-  color: #777;
-}
-
-.about-game h3 {
-  margin: 4px 20px;
-}
-
-.about-game p {
+.end-content p {
   margin: 0 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid red;
+  font-size: 1.2rem;
+}
+
+
+
+.endgame-hidden{
+  display: none;
+}
+
+.end-newgame-btn {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 6px 10px;
+  /*height: 3em;*/
+}
+
+.end-newgame-btn:hover {
+  border: 1px solid orange;
+  background-color: #fff6e7;
+}
+
+.end-newgame-btn:active {
+  background-color: #ffdb9a;
+}
+
+.end-newgame-btn img {
+  height: 2em;
+  margin: 4px;
 }
