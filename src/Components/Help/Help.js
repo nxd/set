@@ -1,6 +1,7 @@
 import React from 'react';
 import './Help.css';
 import shapePaths from '../../utils/ShapePaths.js'
+import RandomSet from '../RandomSet/RandomSet.js';
 
 
 class Help extends React.Component {
@@ -89,7 +90,9 @@ class Help extends React.Component {
 						<div className=''><h3>About this game</h3></div>
 						<p>This web app version of SET was created by Nicholas DeForest in 2020 using React js</p>
 					</div>
+					< RandomSet />
 				</div>
+				
 			)
 		} else {
 			return (null);

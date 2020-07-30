@@ -239,6 +239,54 @@ const GameLogic = {
 	 	}
 
 	 	return(missingSets);
+	 },
+
+	 getRandomSet() {
+	 	// this function generates a single random matching set
+	 	var deckSize = 81;
+	 	// select random value for first card
+	 	var firstCard = Math.floor(Math.random() * deckSize) + 1;
+	 	// initialize second card as null
+	 	var secondCard = null
+	 	// use while loop to ensure second card is not the same as first
+	 	while(secondCard == null || secondCard == firstCard) {
+	 		secondCard = Math.floor(Math.random() * deckSize) + 1;
+	 	}
+	 	// find the third card that completes the set
+	 	var firstCardDims = this.calcCardDim(firstCard)
+	 	var secondCardDims = this.calcCardDim(secondCard)
+	 	var thirdCardDims = []
+
+	 	// define possible dim values
+	 	const dimVals = [0,1,2]
+
+	 	for(let ii=0; ii < 4; ii++) {
+	 		// if dims of first two cards are different, find the third
+	 		if(firstCardDims[ii] != secondCardDims[ii]) {
+	 			// put dims of 1st and 2nd cards in array for filtering
+		 		let foundDims = [firstCardDims[ii], secondCardDims[ii]]
+		 		// find match dim using filter
+		 		let newDim = dimVals.filter( ( el ) => !foundDims.includes( el ) );
+		 		// add to thirdCardDims
+		 		thirdCardDims = thirdCardDims.concat(newDim);
+		 		console.log(`-----dim #${ii+1}-----`)
+		 		console.log(`first card dim: ${foundDims[0]}`)
+		 		console.log(`second card dim: ${foundDims[1]}`)
+		 		console.log(`matching dim: ${newDim[0]}`)
+	 		} else {
+	 			// otherwise, make the third the same
+	 			let newDim = firstCardDims[ii];
+		 		// add to thirdCardDims
+		 		thirdCardDims = thirdCardDims.concat(newDim)
+	 		}
+	 		
+	 	}
+
+	 	// convert thirdCard dims back to cardnum
+	 	let thirdCard = 27*thirdCardDims[0] + 9*thirdCardDims[1] + 3*thirdCardDims[2] + thirdCardDims[3] + 1;
+	 	console.log([firstCard, secondCard, thirdCard])
+	 	console.log([firstCardDims, secondCardDims, thirdCardDims])
+	 	return([firstCard, secondCard, thirdCard]);
 	 }
 
 
