@@ -260,6 +260,9 @@ const GameLogic = {
 	 	// define possible dim values
 	 	const dimVals = [0,1,2]
 
+	 	// list of whether attributes are all the same
+	 	let attrMatch = []
+
 	 	for(let ii=0; ii < 4; ii++) {
 	 		// if dims of first two cards are different, find the third
 	 		if(firstCardDims[ii] != secondCardDims[ii]) {
@@ -269,24 +272,37 @@ const GameLogic = {
 		 		let newDim = dimVals.filter( ( el ) => !foundDims.includes( el ) );
 		 		// add to thirdCardDims
 		 		thirdCardDims = thirdCardDims.concat(newDim);
-		 		console.log(`-----dim #${ii+1}-----`)
-		 		console.log(`first card dim: ${foundDims[0]}`)
-		 		console.log(`second card dim: ${foundDims[1]}`)
-		 		console.log(`matching dim: ${newDim[0]}`)
+		 		// console.log(`-----dim #${ii+1}-----`)
+		 		// console.log(`first card dim: ${foundDims[0]}`)
+		 		// console.log(`second card dim: ${foundDims[1]}`)
+		 		// console.log(`matching dim: ${newDim[0]}`)
+		 		attrMatch = attrMatch.concat([false])
 	 		} else {
 	 			// otherwise, make the third the same
 	 			let newDim = firstCardDims[ii];
 		 		// add to thirdCardDims
 		 		thirdCardDims = thirdCardDims.concat(newDim)
+		 		attrMatch = attrMatch.concat([true])
 	 		}
 	 		
 	 	}
 
 	 	// convert thirdCard dims back to cardnum
 	 	let thirdCard = 27*thirdCardDims[0] + 9*thirdCardDims[1] + 3*thirdCardDims[2] + thirdCardDims[3] + 1;
-	 	console.log([firstCard, secondCard, thirdCard])
-	 	console.log([firstCardDims, secondCardDims, thirdCardDims])
-	 	return([firstCard, secondCard, thirdCard]);
+	 	// console.log([firstCard, secondCard, thirdCard])
+	 	// console.log([firstCardDims, secondCardDims, thirdCardDims])
+
+	 	// order cards by cardNum low to high
+	 	let cardNums = [firstCard, secondCard, thirdCard]
+	 	cardNums = cardNums.sort(function(a, b){return a-b});
+	 	// recalc cardDims base on new order of cardNums
+	 	let cardDims = cardNums.map(this.calcCardDim)
+
+	 	return({
+	 		cardNums: cardNums,
+	 		cardDims: cardDims,
+	 		attrMatch: attrMatch
+	 	});
 	 }
 
 

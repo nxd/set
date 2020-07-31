@@ -1,5 +1,7 @@
 .help-container {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   margin-left:auto;
   width: 400px;
@@ -29,12 +31,13 @@
 
 .help-title h3{
   margin-bottom: 0;
+  margin-top:.8rem;
 }
 
 .exit-help-btn {
   margin: 8px;
   padding: 1px;
-  border-radius: 6px;
+  border-radius: 4px;
   background-color: #BBB;
   color: #EEE;
   height: 1rem;
@@ -47,8 +50,8 @@
   visibility: hidden;
 }
 
-.help-content p {
-  margin: 20px;
+.help-text {
+  margin: 5px 20px;
   text-align: justify;
 }
 
@@ -65,7 +68,7 @@
   display: flex;
 }
 .attr-name {
-  flex:1;
+  flex:1.2;
   font-weight: bold;
 }
 
@@ -73,6 +76,10 @@
   flex:3;
   display: inline-flex;
   justify-content: space-around;
+}
+
+.attr-status {
+  flex:2;
 }
 
 .attr-val {
@@ -110,8 +117,8 @@
 }
 
 .about-game {
-  margin-top: 40px;
-  margin-bottom: 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
   color: #777;
 }
 
@@ -121,4 +128,53 @@
 
 .about-game p {
   margin: 0 20px;
+}
+
+.random-set-container{
+  display: flex;
+  justify-content: center;
+}
+
+.example-set-text{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.help-toggle-btn, .help-btn {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 10px;
+  width: 50%;
+  cursor: pointer;
+}
+
+.help-btn {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.help-toggle-btn:hover {
+  border: 1px solid orange;
+  background-color: #fff6e7;
+}
+
+.help-toggle-btn:active {
+  background-color: #ffdb9a;
+}
+
+.example-set-li {
+  margin: 16px 10px;
+  list-style-type: none;
+}
+.example-ul {
+  padding: 0;
+  margin: 0 16px;
+}
+
+.example-set-li:first-child {
+  margin-top: 4px;
 }

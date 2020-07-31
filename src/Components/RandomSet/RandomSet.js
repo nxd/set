@@ -6,20 +6,25 @@ import GameLogic from '../../utils/GameLogic.js';
 class RandomSet extends React.Component {
 
 	renderRandomSet() {
+		// extract random set from props
+		let randomSet = this.props.setData;
 
-		let randomSet = GameLogic.getRandomSet()
-		// randomMatchDims should instead be card numb
+		// if set is not null, render the cards
+		if(randomSet){
+			// order random set by number
+			randomSet = randomSet.cardNums.sort(function(a, b){return a-b});
+
+			let renderedSet = randomSet.map(cardNum => {
+				return <FoundCard value={cardNum}/>
+			});
+
+			renderedSet = <div className='random-set card-set'>{renderedSet}</div>
+
+			return renderedSet;
+		} else {
+			return null;
+		}
 		
-		// order random set by number
-		randomSet = randomSet.sort(function(a, b){return a-b});
-
-		let renderedSet = randomSet.map(cardNum => {
-			return <FoundCard value={cardNum}/>
-		});
-
-		renderedSet = <div className='random-set card-set'>{renderedSet}</div>
-
-		return renderedSet;
 	}	
 
 	render() {

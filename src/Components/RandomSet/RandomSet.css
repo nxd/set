@@ -1,28 +1,14 @@
-.foundCard {
-	border: .8px solid #555;
-	height: 3.4rem;
+.random-set .foundCard {
 	width: 25%;
-	border-radius: 10px;
-	display: inline-flex;
-	justify-content: center;
-	background-color: #FFF;
-	padding: 0px 1px;
-	margin: 3px;
+	height: 5rem;
+	margin: .4rem;
 }
 
-.foundCard svg{
-	margin:0px 1px;
+.random-set {
+	width: 100%;
+}
+
+.random-set .foundCard svg{
+	margin:4px 1px;
 	width: 28%;
 }
-
-.empty-card{
-	background-color: var(--dim-gray);
-	border: none;
-	/*opacity: 100%;*/
-}
-
-.quit{
-	background-color: hsla(0,60%, 80%, 20%);
-	border: .8px solid red;
-}
-
