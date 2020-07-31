@@ -46,7 +46,8 @@ const gameModeSettings = {
 		easyMode: true,
 		numAttr: 3,
 		showTimer: false,
-		timerLabel: 'no timer'
+		timerLabel: 'no timer',
+		display: true
 	},
 	normal: {
 		numCards: 12,
@@ -54,7 +55,8 @@ const gameModeSettings = {
 		easyMode: false,
 		numAttr: 4,
 		showTimer: true,
-		timerLabel: 'timer on'
+		timerLabel: 'timer on',
+		display: true
 	},
 	hard: {
 		numCards: 15,
@@ -62,7 +64,17 @@ const gameModeSettings = {
 		easyMode: false,
 		numAttr: 4,
 		showTimer: true,
-		timerLabel: 'timer on'
+		timerLabel: 'timer on',
+		display: true
+	},
+	default: {
+		numCards: 9,
+		minSets: 4,
+		easyMode: true,
+		numAttr: 3,
+		showTimer: false,
+		timerLabel: 'no timer',
+		display: false
 	}
 }
 
@@ -73,7 +85,7 @@ class StartBoard extends React.Component {
 		super(props);
 
 		this.state = {
-			hoverMode: null
+			hoverMode: 'default'
 		}
 
 		this.startGame = this.startGame.bind(this);
@@ -111,10 +123,10 @@ class StartBoard extends React.Component {
 		let modeSettings = gameModeSettings[mode];
 
 		return(
-			<ul className='pregame-mode-list'>
+			<ul className={`pregame-mode-list ${modeSettings.display ? null : 'mode-hidden'}`}>
 				<li className='pregame-mode-item'>{modeSettings.numAttr} attributes</li>
 				<li className='pregame-mode-item'>{modeSettings.numCards} cards</li>
-				<li className='pregame-mode-item'>{modeSettings.minSets}</li>
+				<li className='pregame-mode-item'>{modeSettings.minSets} SETs</li>
 				<li className='pregame-mode-item'>{modeSettings.timerLabel}</li>
 			</ul>
 		)		
@@ -133,7 +145,7 @@ class StartBoard extends React.Component {
 								className='pregame-btn' 
 								onClick= {() => this.startGame('easy')}
 								onMouseEnter= {() => this.setHoverMode('easy')}
-								onMouseLeave={() => this.setHoverMode()}
+								onMouseLeave={() => this.setHoverMode('default')}
 							>
 								Easy
 							</div>
@@ -141,7 +153,7 @@ class StartBoard extends React.Component {
 								className='pregame-btn' 
 								onClick= {() => this.startGame('normal')}
 								onMouseEnter= {() => this.setHoverMode('normal')}
-								onMouseLeave={() => this.setHoverMode()}
+								onMouseLeave={() => this.setHoverMode('default')}
 							>
 								Normal
 							</div>
@@ -149,7 +161,7 @@ class StartBoard extends React.Component {
 								className='pregame-btn' 
 								onClick= {() => this.startGame('hard')}
 								onMouseEnter= {() => this.setHoverMode('hard')}
-								onMouseLeave={() => this.setHoverMode()}
+								onMouseLeave={() => this.setHoverMode('default')}
 							>
 								Hard
 							</div>

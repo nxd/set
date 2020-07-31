@@ -23,7 +23,6 @@
 }
 
 .pregame-btn:hover {
-	border: 1px solid orange;
 	background-color: #fff6e7;
 }
 
@@ -42,16 +41,18 @@
 }
 
 .pregame-mode-container{
-	border: 1px solid red;
 	display: flex;
 	justify-content: center
 }
 
 .pregame-mode-list{
-	border: 1px solid green;
 	width: 100px;
 }
 
 .pregame-mode-item{
-	border: 1px solid purple;
+	
+}
+
+.mode-hidden {
+	visibility: hidden;
 }
