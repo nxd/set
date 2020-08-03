@@ -355,6 +355,9 @@ class App extends React.Component {
             showEnd={this.state.gameStatus.postgame}
             newGame = {this.generateNewGame}
             nSets={this.state.nSets}
+            showTimer={false}
+            gameTime='99:99'
+            userQuit={this.state.gameStatus.solved}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>

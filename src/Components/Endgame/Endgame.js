@@ -21,17 +21,39 @@ class Endgame extends React.Component {
 	}
 
 	renderEndMessage() {
+		// return end-status div depending on whether
+		// user was successful or if they quit the game
+		if(this.props.userQuit){
+			let endStatus = (
+				<div className='end-status'>
+					<p><b>You failed!</b></p>
+					<p>Better luck next time. You can do it!</p>
+				</div>
+			)
 
-		let nSets = this.props.nSets;
-		let msg = `You found all ${nSets} SETs`
+			return endStatus;
 
-		if(this.props.showTimer) {
-			msg = msg.concat(` in ${this.props.gameTime}!`)
 		} else {
-			msg = msg.concat('!')
+			let nSets = this.props.nSets;
+			let msg = `You found all ${nSets} SETs`
+
+			if(this.props.showTimer) {
+				msg = msg.concat(` in ${this.props.gameTime}!`)
+			} else {
+				msg = msg.concat('!')
+			}
+
+			let endStatus = (
+				<div className='end-status'>
+					<p><b>Congratulations!</b></p>
+					<p>{msg}</p>
+				</div>
+			)
+
+			return endStatus;
 		}
 
-		return msg;
+		
 	}
 
 	renderEndgame(){
@@ -40,17 +62,20 @@ class Endgame extends React.Component {
 		if(this.props.showEnd){
 			return(
 				<div className={`end-container ${this.state.endDisplayStatus}`}>
-						<div className='end-header'>
-							<div className='exit-end-btn' onClick={this.hideEndgame}>&#10005;</div>
+					<div className='end-header'>
+						<div className='exit-end-btn' onClick={this.hideEndgame}>&#10005;</div>
+					</div>
+					<div className='end-content'>
+						<div className='end-status'>
+							{this.renderEndMessage()}
 						</div>
-						<div className='end-content'>
-							<p>Congratulations!</p>
-							<p>{this.renderEndMessage()}</p>
+						<div className='end-replay'>
 							<p>Play again?</p>
 							<div className='end-newgame-btn' onClick={this.props.newGame}>
 								<img src={newGameButtonSrc}/>
 							</div>
 						</div>
+					</div>						
 				</div>
 			);
 		} else {

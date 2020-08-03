@@ -4,7 +4,7 @@
   margin-left:auto;
   width: 250px;
   margin-right:auto;
-  height: 200px;
+  height: 210px;
   top: 90px;
   left: 0;
   right: 0;
@@ -17,11 +17,25 @@
   cursor: default;
 }
 
+.end-container p {
+  font-size: 1.2rem;
+  margin: 3px 30px;
+  text-align: center;
+}
+
 .end-header {
   display: inline-flex;
   width: 100%;
   justify-content: flex-end;
-  border: 1px solid blue;
+  /*border: 1px solid green;*/
+}
+
+.end-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 184px;
+  /*border: 1px solid blue;*/
 }
 
 .exit-end-btn {
@@ -37,16 +51,13 @@
   cursor: pointer;
 }
 
-.end-content {
-  
+.end-status {
+  /*border: 1px solid green;*/
 }
 
-.end-content p {
-  margin: 0 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  border: 1px solid red;
-  font-size: 1.2rem;
+.end-replay {
+  padding-bottom: 8px;
+  /*border: 1px solid orange;*/
 }
 
 .endgame-hidden{
@@ -58,7 +69,7 @@
   border: 1px solid black;
   border-radius: 4px;
   display: inline-block;
-  margin: 6px 10px;
+  margin: 2px;
   /*height: 3em;*/
 }
 
@@ -75,3 +86,4 @@
   height: 2em;
   margin: 4px;
 }
+
