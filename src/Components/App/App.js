@@ -2,13 +2,11 @@ import React from 'react';
 import './App.css';
 
 import Menu from '../Menu/Menu.js';
+import StartBoard from '../StartBoard/StartBoard.js';
 import Message from '../Message/Message.js';
 import Board from '../Board/Board.js';
 import List from '../List/List.js';
-import Settings from '../Settings/Settings.js';
-import Help from '../Help/Help.js';
-import StartBoard from '../StartBoard/StartBoard.js';
-import Endgame from '../Endgame/Endgame.js';
+import PopUp from '../PopUp/PopUp.js';
 
 import GameLogic from '../../utils/GameLogic.js';
 import Helper from '../../utils/Helper.js';
@@ -150,7 +148,7 @@ class App extends React.Component {
 
 
   shuffleCards() {
-
+    // function changes the order of already dealt cards
     let [newCardList, newCardData] = GameLogic.shuffleDealtCards(this.state.cardList, this.state.cardData);
 
     this.setState({
@@ -299,7 +297,8 @@ class App extends React.Component {
   }
 
   solveGame() {
-
+    // function finds any remaining unfound sets
+    // and switches game mode over to 'solved'
     let quitSets = GameLogic.findMissingSets(this.state.allSets, this.state.foundSets);
 
     this.setState({
@@ -338,26 +337,12 @@ class App extends React.Component {
           updateSettings={this.updateSettings}
         />
         <div className='cards-container'>
-          <Settings 
-            numCards={this.state.numCards}
-            minSets={this.state.minSets}
-            easyMode={this.state.easyMode}
-            showTimer={this.state.showTimer}
-            showSettings={this.state.showSettings}
+          <PopUp 
+            gameState = {this.state} 
             toggleSettings = {this.toggleSettings}
             updateSettings = {this.updateSettings}
-          />
-          <Help 
-            showHelp={this.state.showHelp}
             toggleHelp = {this.toggleHelp}
-          />
-          <Endgame 
-            showEnd={this.state.gameStatus.postgame}
-            newGame = {this.generateNewGame}
-            nSets={this.state.nSets}
-            showTimer={false}
-            gameTime='99:99'
-            userQuit={this.state.gameStatus.solved}
+            generateNewGame = {this.generateNewGame}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>
