@@ -500,7 +500,7 @@ class App extends React.Component {
             generateNewGame = {this.generateNewGame}
             showTimer = {this.state.showTimer}
             time = {this.state.time}
-            nSets = {this.state.nSet}
+            nSets = {this.state.nSets}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>
