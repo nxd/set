@@ -1,6 +1,8 @@
 import React from 'react';
 import './Menu.css';
 
+import Timer from '../Timer/Timer.js';
+
 
 class Menu extends React.Component {
 	// constructor(props) {
@@ -37,7 +39,7 @@ class Menu extends React.Component {
 		//determine button status and icons for pregame
 
 		//determine button status and icons for paused game
-		if(this.props.gameStatus.paused){
+		if(this.props.gameState.paused){
 			pauseButtonSrc = process.env.PUBLIC_URL + 'icons/icon_play.png';
 			newButtonVis = 'btn-hidden';
 			shuffleButtonVis = 'btn-hidden';
@@ -47,12 +49,12 @@ class Menu extends React.Component {
 		}
 
 		// set new game icon to play if in pregame state
-		if(this.props.gameStatus.pregame){
+		if(this.props.gameState.pregame){
 			newGameButtonSrc = process.env.PUBLIC_URL + 'icons/icon_play.png';
 		}
 
 		//determine button status and icons for postgame
-		if(this.props.gameStatus.pregame || this.props.gameStatus.postgame){
+		if(this.props.gameState.pregame || this.props.gameState.postgame){
 			pauseButtonVis = 'btn-removed';
 			shuffleButtonVis = 'btn-hidden';
 			solveButtonVis = 'btn-hidden';
@@ -85,7 +87,13 @@ class Menu extends React.Component {
 
 
 				<div className='submenu-group timer-group'>
-					<h1 id='timerDisplay'>00:00</h1>
+					<Timer 
+						gameState = {this.props.gameState}
+						showTimer = {this.props.showTimer}
+						time = {this.props.time}
+						isOn = {this.props.isOn}
+						start = {this.props.start}
+					/>
 				</div>
 
 

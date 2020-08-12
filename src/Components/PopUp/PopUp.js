@@ -12,25 +12,25 @@ class PopUp extends React.Component {
 		return(
 			<div>
 				<Settings 
-	            numCards={this.props.gameState.numCards}
-	            minSets={this.props.gameState.minSets}
-	            easyMode={this.props.gameState.easyMode}
-	            showTimer={this.props.gameState.showTimer}
-	            showSettings={this.props.gameState.showSettings}
-	            toggleSettings = {this.props.toggleSettings}
-	            updateSettings = {this.props.updateSettings}
-	          />
+		            numCards={this.props.gameState.numCards}
+		            minSets={this.props.gameState.minSets}
+		            easyMode={this.props.gameState.easyMode}
+		            showTimer={this.props.gameState.showTimer}
+		            showSettings={this.props.gameState.settings}
+		            toggleSettings = {this.props.toggleSettings}
+		            updateSettings = {this.props.updateSettings}
+		         />
 	          <Help 
-	            showHelp={this.props.gameState.showHelp}
+	            showHelp={this.props.gameState.help}
 	            toggleHelp = {this.props.toggleHelp}
 	          />
 	          <Endgame 
-	            showEnd={this.props.gameState.gameStatus.postgame}
+	            showEnd={this.props.gameState.postgame}
 	            newGame = {this.props.generateNewGame}
-	            nSets={this.props.gameState.nSets}
-	            showTimer={false}
-	            gameTime='99:99'
-	            userQuit={this.props.gameState.gameStatus.solved}
+	            nSets={this.props.nSets}
+	            showTimer={this.props.showTimer}
+	            gameTime={this.props.time}
+	            userQuit={this.props.gameState.solved}
 	          />
 			</div>
 		);

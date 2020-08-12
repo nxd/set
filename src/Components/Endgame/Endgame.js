@@ -1,6 +1,8 @@
 import React from 'react';
 import './Endgame.css';
 
+import GameLogic from '../../utils/GameLogic.js';
+
 
 class Endgame extends React.Component {
 
@@ -38,7 +40,7 @@ class Endgame extends React.Component {
 			let msg = `You found all ${nSets} SETs`
 
 			if(this.props.showTimer) {
-				msg = msg.concat(` in ${this.props.gameTime}!`)
+				msg = msg.concat(` in ${GameLogic.timeStringFromMs(this.props.gameTime)}!`)
 			} else {
 				msg = msg.concat('!')
 			}

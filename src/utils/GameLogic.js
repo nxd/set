@@ -303,7 +303,20 @@ const GameLogic = {
 	 		cardDims: cardDims,
 	 		attrMatch: attrMatch
 	 	});
-	 }
+	 },
+
+	   padZeros(num, size) {
+		var s = num+"";
+		while (s.length < size) s = "0" + s;
+		return s;
+	  },
+
+	  timeStringFromMs(time) {
+	  	let min = Math.floor(time/(60*1000))
+	    let sec = Math.floor((time % (60*1000))/1000);
+	    let timeString = `${this.padZeros(min,2)}:${this.padZeros(sec,2)}`
+	    return timeString    
+	  }
 
 
 

@@ -12,7 +12,7 @@ class Board extends React.Component {
 				
 				{this.props.cardDataList.map((cardData) => (
 					<Card 
-						gamePaused={this.props.gameStatus.paused}
+						gamePaused={this.props.gameState.paused}
 						cardData={cardData}
 						onCardSelect={this.props.onCardSelect}
 					/>

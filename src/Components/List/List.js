@@ -8,7 +8,7 @@ class List extends React.Component {
 	isPregame() {
 		// this method returns an additional classname
 		// to hide the SETs found text if in pregame state
-		if(this.props.gameStatus.pregame){
+		if(this.props.gameState.pregame){
 			return 'status-hidden';
 		}
 	}

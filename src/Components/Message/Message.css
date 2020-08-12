@@ -27,6 +27,10 @@ h3.duplicate-msg {
 	background-color: rgba(90, 90, 90, 0.4)
 }
 
+h3.neutral-msg {
+	background-color: rgba(90, 90, 90, 0.4)
+}
+
 h3.empty-msg {
 	visibility: hidden;
 }

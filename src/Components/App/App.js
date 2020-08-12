@@ -17,20 +17,26 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      gameStatus: {
+      // object indicated what state the game is in
+      gameState: {
         pregame: true,
         active: false,
         paused: false,
         postgame: false,
-        solved: false
+        solved: false,
+        settings: false,
+        help: false
       },
+      showHelp: false,
+      showSettings: false,
+      // default game settings for generating new games
       numCards: 9,
       minSets: 4,
       maxAttempts: 500,
       easyMode: true,
-      showHelp: false,
-      showSettings: false,
       showTimer: true,
+      // state properties generated for each game
+      // start off empty
       cardList: [0,0,0,0,0,0,0,0,0],
       cardData: [],
       allSets: [],
@@ -39,10 +45,15 @@ class App extends React.Component {
       foundSets: [],
       quitSets: [],
       selectedCards: [],
+      // status message
       message: {
         type: 'empty-msg',
         content: 'empty'
-      }
+      },
+      // timer properties
+      time: 0,
+      isOn: false,
+      start: 0
     };
 
     this.generateNewGame = this.generateNewGame.bind(this);
@@ -53,6 +64,9 @@ class App extends React.Component {
     this.toggleHelp = this.toggleHelp.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
     this.updateSettings = this.updateSettings.bind(this);
+    this.startTimer = this.startTimer.bind(this)
+    this.stopTimer = this.stopTimer.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
   }
 
   generateNewGame() {
@@ -79,12 +93,14 @@ class App extends React.Component {
     };
 
     this.setState({
-      gameStatus: {
+      gameState: {
         pregame: false,
         active: true,
         paused: false,
         postgame: false,
-        solved: false
+        solved: false,
+        settings: false,
+        help: false
       },
       selectedCards: [],
       cardList:cardList,
@@ -93,41 +109,149 @@ class App extends React.Component {
       cardData:cardData,
       foundSets: [],
       quitSets: [],
-      message: message
-    });
+      message: message,
+      time: 0, 
+      isOn: false
+    }, this.startTimer);
+  }
+
+  togglePauseMulti(pauseType) {
+    // this function toggles multiple pause modes:
+    // for regular pause, settings, and help menus
+
+    // 
+    var currentGameState = this.state.gameState;
+
   }
 
 
   pauseGame(){
-    //pause should not do anything is pregame, settings, or help mode
-    if(this.state.gameStatus.pregame){
+    //pause should not do anything in pregame, settings, or help mode
+    if(this.state.gameState.pregame){
       return;
     }
 
-    let pauseState = this.state.gameStatus.paused;
-    this.setState({gameStatus: {
+    let pauseState = this.state.gameState.paused;
+    let newMessage = {}
+    //if game will be paused, set message to 'game is paused'
+    if(!pauseState){
+      newMessage = {
+        type: 'neutral-msg',
+        content: 'Your game is paused'
+      };
+    } else {
+      newMessage = {
+        type: 'empty-msg',
+        content: 'empty'
+      };
+    }
+
+    this.setState({gameState: {
         pregame: false,
         active: pauseState,
         paused: !pauseState,
         postgame: false,
-        solved: false
-    }});
+        solved: false,
+        settings: false,
+        help: false
+      },
+      message: newMessage
+    });
+
+    if(pauseState) {
+      //if going fro paused to unpaused, start timer
+      this.startTimer();
+    } else {
+      // otherwise, stop timer
+      this.stopTimer();
+    }
+    
   }
 
   toggleHelp(){
     // if game active, pause and active help
     // otherwise, hide help and unpause
-    this.pauseGame();
-    var currentHelp = this.state.showHelp;
-    this.setState({showHelp:!currentHelp})
+
+    // check current help and postgame states
+    var currentHelp = this.state.gameState.help;
+    var currentPostgame = this.state.gameState.postgame;
+    var currentQuit = this.state.gameState.solved;
+    var newGameState = {}
+    var timerCallback
+
+    if(!currentHelp) {
+      // if help not currently active
+      // pause game, display help, don't change postgame or userQuit states
+      newGameState = {
+        pregame: false,
+        active: false,
+        paused: true,
+        postgame: currentPostgame,
+        solved: currentQuit,
+        settings: false,
+        help: true
+      };
+      timerCallback = this.stopTimer;
+    } else {
+      // if help is current open
+      // close help, unpause game, don't change postgame or userQuit
+      newGameState = {
+        pregame: false,
+        active: true,
+        paused: false,
+        postgame: currentPostgame,
+        solved: currentQuit,
+        settings: false,
+        help: false
+      };
+      timerCallback = this.startTimer;
+    }
+
+    // set new gameState then call timer callback func
+    this.setState({gameState:newGameState}, timerCallback)
   }
 
   toggleSettings(){
-    // if game active, pause and active help
-    // otherwise, hide help and unpause
-    this.pauseGame();
-    var currentSettings = this.state.showSettings;
-    this.setState({showSettings:!currentSettings})
+    // if game active, pause and active settings
+    // otherwise, hide settings and unpause
+
+    // check current help and postgame states
+    var currentSettings = this.state.gameState.settings;
+    var currentPostgame = this.state.gameState.postgame;
+    var currentQuit = this.state.gameState.solved;
+    var newGameState = {}
+    var timerCallback
+
+    if(!currentSettings) {
+      // if help not currently active
+      // pause game, display help, don't change postgame or userQuit states
+      newGameState = {
+        pregame: false,
+        active: false,
+        paused: true,
+        postgame: currentPostgame,
+        solved: currentQuit,
+        settings: true,
+        help: false
+      };
+      timerCallback = this.stopTimer;
+    } else {
+      // if help is current open
+      // close help, unpause game, don't change postgame or userQuit
+      newGameState = {
+        pregame: false,
+        active: true,
+        paused: false,
+        postgame: currentPostgame,
+        solved: currentQuit,
+        settings: false,
+        help: false
+      };
+      timerCallback = this.startTimer;
+    }
+
+    // set new gameState then call timer callback func
+    this.setState({gameState:newGameState}, timerCallback)
   }
 
   updateSettings(newSettings, doToggle){
@@ -157,10 +281,30 @@ class App extends React.Component {
     })
   }
 
+  startTimer() {
+    this.setState({
+      isOn: true,
+      time: this.state.time,
+      start: Date.now() - this.state.time
+    })
+    this.timer = setInterval(() => this.setState({
+      time: Date.now() - this.state.start
+    }), 1);
+  }
+
+  stopTimer() {
+    this.setState({isOn: false})
+    clearInterval(this.timer)
+  }
+
+  resetTimer() {
+    this.setState({time: 0, isOn: false})
+  }
+
 
   selectCard(cardNum) {
     // only proceed if game is active
-    if(!this.state.gameStatus.active){
+    if(!this.state.gameState.active){
       return;
     }
 
@@ -224,14 +368,17 @@ class App extends React.Component {
               };
               this.setState({
                 message:message,
-                gameStatus: {
+                gameState: {
                   pregame: false,
                   active: false,
                   paused: false,
                   postgame: true,
-                  solved: false
+                  solved: false,
+                  settings: false,
+                  help: false
                 }
               });
+              this.stopTimer();
               return;
             }
 
@@ -302,12 +449,14 @@ class App extends React.Component {
     let quitSets = GameLogic.findMissingSets(this.state.allSets, this.state.foundSets);
 
     this.setState({
-      gameStatus: {
+      gameState: {
         pregame: false,
         active: false,
         paused: false,
         postgame: true,
-        solved: true
+        solved: true,
+        settings: false,
+        help: false
       },
       quitSets: quitSets,
       message: {
@@ -316,6 +465,8 @@ class App extends React.Component {
       }
 
     })
+
+    this.stopTimer();
 
   }
 
@@ -328,26 +479,33 @@ class App extends React.Component {
           pauseGame = {this.pauseGame}
           shuffleCards = {this.shuffleCards}
           solveGame = {this.solveGame}
-          gameStatus = {this.state.gameStatus}
+          gameState = {this.state.gameState}
           toggleHelp = {this.toggleHelp}
           toggleSettings = {this.toggleSettings}
+          showTimer = {this.state.showTimer}
+          time = {this.state.time}
+          isOn = {this.state.isOn}
+          start = {this.state.start}
         />
         <StartBoard 
-          pregame={this.state.gameStatus.pregame}
+          pregame={this.state.gameState.pregame}
           updateSettings={this.updateSettings}
         />
         <div className='cards-container'>
           <PopUp 
-            gameState = {this.state} 
+            gameState = {this.state.gameState} 
             toggleSettings = {this.toggleSettings}
             updateSettings = {this.updateSettings}
             toggleHelp = {this.toggleHelp}
             generateNewGame = {this.generateNewGame}
+            showTimer = {this.state.showTimer}
+            time = {this.state.time}
+            nSets = {this.state.nSet}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>
             <Board 
-              gameStatus = {this.state.gameStatus}
+              gameState = {this.state.gameState}
               cardDataList={this.state.cardData}
               cardList={this.state.cardList}
               onCardSelect={this.selectCard}
@@ -355,7 +513,7 @@ class App extends React.Component {
           </div>
           <div className='right-panel'> 
             <List
-              gameStatus = {this.state.gameStatus}
+              gameState = {this.state.gameState}
               nSets={this.state.nSets}
               foundSets={this.state.foundSets} 
               quitSets={this.state.quitSets} 
