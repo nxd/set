@@ -12,10 +12,10 @@ class PopUp extends React.Component {
 		return(
 			<div>
 				<Settings 
-		            numCards={this.props.gameState.numCards}
-		            minSets={this.props.gameState.minSets}
-		            easyMode={this.props.gameState.easyMode}
-		            showTimer={this.props.gameState.showTimer}
+		            numCards={this.props.numCards}
+		            minSets={this.props.minSets}
+		            easyMode={this.props.easyMode}
+		            showTimer={this.props.showTimer}
 		            showSettings={this.props.gameState.settings}
 		            toggleSettings = {this.props.toggleSettings}
 		            updateSettings = {this.props.updateSettings}

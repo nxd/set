@@ -17,7 +17,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      // object indicated what state the game is in
+      // object indicating what state the game is in
       gameState: {
         pregame: true,
         active: false,
@@ -33,7 +33,7 @@ class App extends React.Component {
       numCards: 9,
       minSets: 4,
       maxAttempts: 500,
-      easyMode: true,
+      easyMode: false,
       showTimer: true,
       // state properties generated for each game
       // start off empty
@@ -500,7 +500,10 @@ class App extends React.Component {
             generateNewGame = {this.generateNewGame}
             showTimer = {this.state.showTimer}
             time = {this.state.time}
+            numCards = {this.state.numCards}
             nSets = {this.state.nSets}
+            minSets = {this.state.minSets}
+            easyMode = {this.state.easyMode}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>
