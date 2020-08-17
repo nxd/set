@@ -28,7 +28,6 @@ class Endgame extends React.Component {
 		if(this.props.userQuit){
 			let endStatus = (
 				<div className='end-status'>
-					<p><b>You failed!</b></p>
 					<p>Better luck next time. You can do it!</p>
 				</div>
 			)
@@ -47,7 +46,6 @@ class Endgame extends React.Component {
 
 			let endStatus = (
 				<div className='end-status'>
-					<p><b>Congratulations!</b></p>
 					<p>{msg}</p>
 				</div>
 			)
@@ -56,6 +54,26 @@ class Endgame extends React.Component {
 		}
 
 		
+	}
+
+	renderEndImage() {
+		// return end-game image based on win/lose status
+		// user was successful or if they quit the game
+		if(this.props.userQuit){
+			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_lose.png';
+			var endGameExclaim = "You quit!"
+		} else {
+			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_win.png';
+			var endGameExclaim = "Congratulations!"
+		}
+
+		return (
+			<div>
+				<img className='end-img' src={endGameImgSrc} />
+				<h3>{endGameExclaim}</h3>
+			</div>
+
+		)
 	}
 
 	renderEndgame(){
@@ -68,6 +86,9 @@ class Endgame extends React.Component {
 						<div className='exit-end-btn' onClick={this.hideEndgame}>&#10005;</div>
 					</div>
 					<div className='end-content'>
+						<div className='end-img-div'>
+							{this.renderEndImage()}
+						</div>
 						<div className='end-status'>
 							{this.renderEndMessage()}
 						</div>

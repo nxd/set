@@ -2,10 +2,10 @@
   display: block;
   position: fixed;
   margin-left:auto;
-  width: 250px;
+  width: 270px;
   margin-right:auto;
-  height: 210px;
-  top: 90px;
+  height: 300px;
+  top: 130px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 184px;
+  height: 270px;
   /*border: 1px solid blue;*/
 }
 
@@ -52,6 +52,16 @@
 }
 
 .end-status {
+  /*border: 1px solid green;*/
+}
+
+.end-img-div h3{
+  /*border: 1px solid purple;*/
+  margin: 0 4px;
+  font-size: 1.4rem;
+}
+
+.end-status p{
   /*border: 1px solid green;*/
 }
 
@@ -84,6 +94,15 @@
 
 .end-newgame-btn img {
   height: 2em;
+  margin: 4px;
+}
+
+.end-img-div {
+  /*border: 1px solid red;*/
+}
+
+.end-img {
+  height: 3em;
   margin: 4px;
 }
 
