@@ -357,8 +357,8 @@ class App extends React.Component {
           // console.log(this.state.selectedCards)
           // check if already found, otherwise add to found list
           let foundSets = this.state.foundSets;
-          if(!GameLogic.isSetinArray(foundSets, selectedCards.sort())){
-            foundSets.push(selectedCards.sort())
+          if(!GameLogic.isSetinArray(foundSets, selectedCards.sort(function(a, b){return a-b}))){
+            foundSets.push(selectedCards.sort(function(a, b){return a-b}))
             console.log(`found sets = ${foundSets.length}`)
             // if founds Sets is complete, set endgame message
             if(foundSets.length===this.state.nSets){
