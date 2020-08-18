@@ -25,12 +25,14 @@ class PopUp extends React.Component {
 	            toggleHelp = {this.props.toggleHelp}
 	          />
 	          <Endgame 
-	            showEnd={this.props.gameState.postgame}
+	            postgame={this.props.gameState.postgame}
 	            newGame = {this.props.generateNewGame}
 	            nSets={this.props.nSets}
 	            showTimer={this.props.showTimer}
 	            gameTime={this.props.time}
 	            userQuit={this.props.gameState.solved}
+	            showEnd = {this.props.showEnd}
+            	hideEnd = {this.props.hideEnd}
 	          />
 			</div>
 		);

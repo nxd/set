@@ -29,6 +29,7 @@ class App extends React.Component {
       },
       showHelp: false,
       showSettings: false,
+      showEnd: true,
       // default game settings for generating new games
       numCards: 9,
       minSets: 4,
@@ -64,9 +65,10 @@ class App extends React.Component {
     this.toggleHelp = this.toggleHelp.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
     this.updateSettings = this.updateSettings.bind(this);
-    this.startTimer = this.startTimer.bind(this)
-    this.stopTimer = this.stopTimer.bind(this)
-    this.resetTimer = this.resetTimer.bind(this)
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+    this.hideEnd = this.hideEnd.bind(this);
   }
 
   generateNewGame() {
@@ -110,6 +112,7 @@ class App extends React.Component {
       foundSets: [],
       quitSets: [],
       message: message,
+      showEnd: true,
       time: 0, 
       isOn: false
     }, this.startTimer);
@@ -301,6 +304,10 @@ class App extends React.Component {
     this.setState({time: 0, isOn: false})
   }
 
+  hideEnd() {
+    this.setState({showEnd:false})
+  }
+
 
   selectCard(cardNum) {
     // only proceed if game is active
@@ -377,8 +384,7 @@ class App extends React.Component {
                   settings: false,
                   help: false
                 }
-              });
-              this.stopTimer();
+              }, this.stopTimer());
               return;
             }
 
@@ -464,9 +470,7 @@ class App extends React.Component {
         content: 'Better Luck Next Time!'
       }
 
-    })
-
-    this.stopTimer();
+    }, this.stopTimer())
 
   }
 
@@ -504,6 +508,8 @@ class App extends React.Component {
             nSets = {this.state.nSets}
             minSets = {this.state.minSets}
             easyMode = {this.state.easyMode}
+            showEnd = {this.state.showEnd}
+            hideEnd = {this.hideEnd}
           />
           <div className='left-panel'>
             <Message message={this.state.message}/>

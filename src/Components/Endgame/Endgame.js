@@ -6,22 +6,6 @@ import GameLogic from '../../utils/GameLogic.js';
 
 class Endgame extends React.Component {
 
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			endDisplayStatus: null
-		}
-
-		this.hideEndgame = this.hideEndgame.bind(this);
-	}
-
-	hideEndgame() {
-		this.setState({
-			endDisplayStatus: 'endgame-hidden'
-		})
-	}
-
 	renderEndMessage() {
 		// return end-status div depending on whether
 		// user was successful or if they quit the game
@@ -79,11 +63,11 @@ class Endgame extends React.Component {
 	renderEndgame(){
 		var newGameButtonSrc = process.env.PUBLIC_URL + 'icons/icon_refresh.png';
 
-		if(this.props.showEnd){
+		if(this.props.postgame & this.props.showEnd){
 			return(
-				<div className={`end-container ${this.state.endDisplayStatus}`}>
+				<div className={'end-container'}>
 					<div className='end-header'>
-						<div className='exit-end-btn' onClick={this.hideEndgame}>&#10005;</div>
+						<div className='exit-end-btn' onClick={this.props.hideEnd}>&#10005;</div>
 					</div>
 					<div className='end-content'>
 						<div className='end-img-div'>
