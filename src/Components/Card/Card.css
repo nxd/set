@@ -45,6 +45,7 @@
 }
 
 .paused svg {
-	visibility: hidden;
+	/*visibility: hidden;*/
+	fill: var(--dim-gray);
 }
 
