@@ -6,63 +6,31 @@ import GameLogic from '../../utils/GameLogic.js';
 
 class Endgame extends React.Component {
 
-	renderEndMessage() {
-		// return end-status div depending on whether
-		// user was successful or if they quit the game
-		if(this.props.userQuit){
-			let endStatus = (
-				<div className='end-status'>
-					<p>Better luck next time. You can do it!</p>
-				</div>
-			)
-
-			return endStatus;
-
-		} else {
-			let nSets = this.props.nSets;
-			let msg = `You found all ${nSets} SETs`
-
-			if(this.props.showTimer) {
-				msg = msg.concat(` in ${GameLogic.timeStringFromMs(this.props.gameTime)}!`)
-			} else {
-				msg = msg.concat('!')
-			}
-
-			let endStatus = (
-				<div className='end-status'>
-					<p>{msg}</p>
-				</div>
-			)
-
-			return endStatus;
-		}
-
-		
-	}
-
-	renderEndImage() {
-		// return end-game image based on win/lose status
-		// user was successful or if they quit the game
-		if(this.props.userQuit){
-			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_lose.png';
-			var endGameExclaim = "You quit!"
-		} else {
-			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_win.png';
-			var endGameExclaim = "Congratulations!"
-		}
-
-		return (
-			<div>
-				<img className='end-img' src={endGameImgSrc} />
-				<h3>{endGameExclaim}</h3>
-			</div>
-
-		)
-	}
-
 	renderEndgame(){
 		var newGameButtonSrc = process.env.PUBLIC_URL + 'icons/icon_refresh.png';
 
+		// set message and img src if user has quit game
+		if(this.props.userQuit){
+			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_lose.png';
+			var endGameExclaim = "You quit!"
+			var endGameMsg = "Better luck next time. You can do it!"
+		} else {
+		// set message and img src if user wins
+
+			var endGameImgSrc = process.env.PUBLIC_URL + 'icons/icon_win.png';
+			var endGameExclaim = "Congratulations, Cactus!"
+			var endGameMsg = `You found all ${this.props.nSets} SETs`
+			
+			// if timer is enabled, add total game time to message
+			if(this.props.showTimer) {
+				endGameMsg = endGameMsg.concat(` in ${GameLogic.timeStringFromMs(this.props.gameTime)}!`)
+			} else {
+				endGameMsg = endGameMsg.concat('!')
+			}
+		}
+
+		// return html for endgame using content defined above
+		// if in postgame, and showEnd option enabled
 		if(this.props.postgame & this.props.showEnd){
 			return(
 				<div className={'end-container'}>
@@ -71,10 +39,13 @@ class Endgame extends React.Component {
 					</div>
 					<div className='end-content'>
 						<div className='end-img-div'>
-							{this.renderEndImage()}
+							<div>
+								<img className='end-img' src={endGameImgSrc} />
+								<h3>{endGameExclaim}</h3>
+							</div>
 						</div>
 						<div className='end-status'>
-							{this.renderEndMessage()}
+							<p>{endGameMsg}</p>
 						</div>
 						<div className='end-replay'>
 							<p>Play again?</p>
@@ -86,6 +57,7 @@ class Endgame extends React.Component {
 				</div>
 			);
 		} else {
+			// otherwise return null
 			return(null)
 		}
 	}
