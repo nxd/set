@@ -71,6 +71,7 @@ class App extends React.Component {
     this.hideEnd = this.hideEnd.bind(this);
   }
 
+
   generateNewGame() {
     var cardList;
     var allSets;
@@ -118,6 +119,7 @@ class App extends React.Component {
     }, this.startTimer);
   }
 
+
   togglePauseMulti(pauseType) {
     // this function toggles multiple pause modes:
     // for regular pause, settings, and help menus
@@ -136,17 +138,22 @@ class App extends React.Component {
 
     let pauseState = this.state.gameState.paused;
     let newMessage = {}
+    var pauseCallback;
     //if game will be paused, set message to 'game is paused'
     if(!pauseState){
       newMessage = {
         type: 'neutral-msg',
         content: 'Your game is paused'
       };
+      //if going from unpaused to paused, stop timer
+      pauseCallback = this.stopTimer;
     } else {
       newMessage = {
         type: 'empty-msg',
         content: 'empty'
       };
+      //if going from paused to unpaused, start timer
+      pauseCallback = this.startTimer;
     }
 
     this.setState({gameState: {
@@ -159,17 +166,12 @@ class App extends React.Component {
         help: false
       },
       message: newMessage
-    });
+    }, pauseCallback());
 
-    if(pauseState) {
-      //if going fro paused to unpaused, start timer
-      this.startTimer();
-    } else {
-      // otherwise, stop timer
-      this.stopTimer();
-    }
+    
     
   }
+
 
   toggleHelp(){
     // if game active, pause and active help
@@ -214,6 +216,7 @@ class App extends React.Component {
     this.setState({gameState:newGameState}, timerCallback)
   }
 
+
   toggleSettings(){
     // if game active, pause and active settings
     // otherwise, hide settings and unpause
@@ -225,11 +228,15 @@ class App extends React.Component {
     var newGameState = {}
     var timerCallback
 
+    // if opening setting from pregame, return to pregame on toggle
+    var currentPregame = this.state.gameState.pregame;
+    var currentActive = !this.state.gameState.pregame;
+
     if(!currentSettings) {
       // if help not currently active
       // pause game, display help, don't change postgame or userQuit states
       newGameState = {
-        pregame: false,
+        pregame: currentPregame,
         active: false,
         paused: true,
         postgame: currentPostgame,
@@ -242,8 +249,8 @@ class App extends React.Component {
       // if help is current open
       // close help, unpause game, don't change postgame or userQuit
       newGameState = {
-        pregame: false,
-        active: true,
+        pregame: currentPregame,
+        active: currentActive,
         paused: false,
         postgame: currentPostgame,
         solved: currentQuit,
@@ -256,6 +263,7 @@ class App extends React.Component {
     // set new gameState then call timer callback func
     this.setState({gameState:newGameState}, timerCallback)
   }
+
 
   updateSettings(newSettings, doToggle){
     //updates numCards, minSets, easyMode, and/or showTimer
@@ -284,6 +292,7 @@ class App extends React.Component {
     })
   }
 
+
   startTimer() {
     this.setState({
       isOn: true,
@@ -295,14 +304,17 @@ class App extends React.Component {
     }), 1);
   }
 
+
   stopTimer() {
     this.setState({isOn: false})
     clearInterval(this.timer)
   }
 
+
   resetTimer() {
     this.setState({time: 0, isOn: false})
   }
+
 
   hideEnd() {
     this.setState({showEnd:false})
@@ -448,6 +460,7 @@ class App extends React.Component {
       }
     })
   }
+
 
   solveGame() {
     // function finds any remaining unfound sets
