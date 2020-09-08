@@ -6,5 +6,5 @@
 
   	/*border: 1px solid red;*/
   	
-	background-color: #EEE;
+	background-color: var(--lt-gray);
 }

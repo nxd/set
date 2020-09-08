@@ -12,8 +12,8 @@
 }
 
 .pregame-btn {
-	background-color: white;
-	border: 1px solid black;
+	background-color: var(--lightest);
+	border: 1px solid var(--border-color);
 	border-radius: 4px;
 	display: inline-block;
 	margin: 6px 10px;
@@ -23,11 +23,12 @@
 }
 
 .pregame-btn:hover {
-	background-color: #fff6e7;
+	background-color: var(--btn-color-hover);
+	border: 1px solid var(--btn-color-active-border);
 }
 
 .pregame-btn:active {
-	background-color: #ffdb9a;
+	background-color: var(--btn-color-active);
 }
 
 .set-svg-container {

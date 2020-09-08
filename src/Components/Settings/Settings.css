@@ -9,10 +9,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #EEE;
+  background-color: var(--lt-gray);
   z-index: 2;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
 }
 
@@ -28,7 +28,7 @@
 
 .settings-btn {
   /*margin: 20px;*/
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   padding: 10px 30px;
   width: 60%;
 }
@@ -68,17 +68,17 @@
   width: 22px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--lightest);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--lt-green);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--lt-green);
 }
 
 input:checked + .slider:before {

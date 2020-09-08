@@ -7,7 +7,25 @@
   --set-red: rgb(221, 78, 74);
   --set-green: rgb(80, 176, 99);
   --set-blue: rgb(69, 48, 141);
-  --dim-gray: #cccccc;
+
+  --lightest: #FFFFFF;
+  --lt-gray: #EEEEEE;
+  --med-gray: #cccccc;
+  --dim-gray: rgb(167, 167, 167);
+
+  --lt-red: rgb(224, 161, 161);
+  --lt-green: rgb(164, 206, 170);
+  --lt-blue: rgb(158, 150, 188);
+
+  --btn-color-hover: #fff6e7;
+  --btn-color-active: #ffdb9a;
+  --btn-color-active-border: orange;
+
+  --card-color-active: #c1e1ec;
+  --card-color-hover: #add8e6;
+
+  --border-color: #444444;
+  --quit-card-red: #e8dada;
 }
 
 .App {
@@ -19,7 +37,7 @@
 	flex-direction: column;
 	max-width: 1000px;
 	min-width: 400px;
-	background-color: #EEE;
+	background-color: var(--lt-gray);
 }
 
 .cards-container {
