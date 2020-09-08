@@ -184,11 +184,15 @@ class App extends React.Component {
     var newGameState = {}
     var timerCallback
 
+    // if opening setting from pregame, return to pregame on toggle
+    var currentPregame = this.state.gameState.pregame;
+    var currentActive = !this.state.gameState.pregame;
+
     if(!currentHelp) {
       // if help not currently active
       // pause game, display help, don't change postgame or userQuit states
       newGameState = {
-        pregame: false,
+        pregame: currentPregame,
         active: false,
         paused: true,
         postgame: currentPostgame,
@@ -201,8 +205,8 @@ class App extends React.Component {
       // if help is current open
       // close help, unpause game, don't change postgame or userQuit
       newGameState = {
-        pregame: false,
-        active: true,
+        pregame: currentPregame,
+        active: currentActive,
         paused: false,
         postgame: currentPostgame,
         solved: currentQuit,
